@@ -1,6 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
+  imports: {
+    dirs: [
+      'components/layouts/**',
+    ],
+  },
   css: ["~/assets/css/main.css"],
   devtools: { enabled: true },
   modules: ["@nuxt/image", "@nuxt/ui", "@nuxtjs/i18n"],
@@ -16,5 +21,6 @@ export default defineNuxtConfig({
     preference: "system", // default value of $colorMode.preference
     fallback: "light", // fallback value if not system preference found
     classSuffix: "",
-  }
+  },
+   
 });
