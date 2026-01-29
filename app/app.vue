@@ -6,9 +6,7 @@ const layout = computed(() => {
   } else if (route.path.startsWith('/pos')) {
     return 'pos-layout'
   }
-  else {
-    return 'default'
-  }
+
 })
 
 </script>
