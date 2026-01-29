@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import * as z from 'zod'
 import type { FormSubmitEvent } from '@nuxt/ui'
-
 const schema = z.object({
     email: z.email('Invalid email'),
     password: z.string('Password is required').min(8, 'Must be at least 8 characters')
@@ -36,7 +35,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 
                <div class="flex justify-center">
                  <UButton class="w-full flex justify-center " type="submit">
-                   <span class="text-white">Login</span>
+                   <span class="text-white">{{ $t('label.login') }}</span>
                 </UButton>
                </div>
             </UForm>
