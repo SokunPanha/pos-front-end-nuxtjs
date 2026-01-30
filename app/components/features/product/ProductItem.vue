@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useCartStore } from '~/stores/cart'
+
 type Product = {
   id: number
   name: string
@@ -14,27 +16,25 @@ const props = defineProps<{
   product: Product
 }>()
 
+const cartStore = useCartStore()
+const quantity = ref(1)
 const finalPrice = computed(() =>
   props.product.promoPrice ?? props.product.originalPrice
 )
+function handleAddToCart() {
+  cartStore.addToCart(props.product, quantity.value)
+  quantity.value = 1
+}
 </script>
 
 <template>
-  <UCard class="hover:shadow-lg duration-300 hover:scale-[1.03] cursor-pointer">
+  <UCard class="hover:shadow-lg  cursor-pointer">
     <!-- Image -->
     <div class="relative">
-      <img
-        :src="product.image"
-        :alt="product.name"
-        class="h-40 w-full object-cover rounded-lg"
-      />
+      <img :src="product.image" :alt="product.name" class="h-40 w-full object-cover rounded-lg" />
 
       <!-- Discount badge -->
-      <UBadge
-        v-if="product.discountPercent"
-        color="error"
-        class="absolute top-2 left-2"
-      >
+      <UBadge v-if="product.discountPercent" color="error" class="absolute top-2 left-2">
         -{{ product.discountPercent }}%
       </UBadge>
     </div>
@@ -55,10 +55,7 @@ const finalPrice = computed(() =>
           ${{ finalPrice.toFixed(2) }}
         </span>
 
-        <span
-          v-if="product.promoPrice"
-          class="line-through text-sm text-gray-400"
-        >
+        <span v-if="product.promoPrice" class="line-through text-sm text-gray-400">
           ${{ product.originalPrice.toFixed(2) }}
         </span>
       </div>
@@ -66,14 +63,25 @@ const finalPrice = computed(() =>
 
     <!-- Action -->
     <template #footer>
-      <UButton
-      class="cursor-pointer text-black"
-        block
-        color="primary"
-        icon="i-heroicons-shopping-cart"
-      >
+      <UButton v-if="cartStore.getItemById(props.product.id) == 0 " class="cursor-pointer text-black" block
+        color="primary" icon="i-heroicons-shopping-cart" @click="handleAddToCart">
         Add to cart
       </UButton>
+      <div v-if=" cartStore.getItemById(props.product.id) > 0 " class="flex gap-2 items-center justify-center"><!-- Quantity -->
+        <div class="flex items-center gap-2">
+          <UButton class="cursor-pointer" size="xs" icon="i-heroicons-minus" @click="cartStore.decrease(props.product.id)" />
+
+          <span class="w-5 text-center">
+            {{ cartStore.getItemById(props.product.id) }}
+          </span>
+
+          <UButton class="cursor-pointer" size="xs" icon="i-heroicons-plus" @click="cartStore.increase(props.product.id)" />
+        </div>
+
+        <!-- Remove -->
+        <UButton class="cursor-pointer" color="error" variant="ghost" icon="i-heroicons-trash" @click="cartStore.remove(props.product.id)" />
+      </div>
     </template>
+
   </UCard>
 </template>
