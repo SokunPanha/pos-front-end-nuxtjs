@@ -8,3 +8,11 @@ export type CartItem = {
   image: string
   note?: string
 }
+
+export type OrderType = 'dine-in' | 'take-away'
+
+export type OrderOptions = {
+  orderType: OrderType
+  tableNumber?: string   // only for dine-in
+  note?: string
+}

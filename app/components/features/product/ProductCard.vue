@@ -1,16 +1,6 @@
 <script setup lang="ts">
 import { useCartStore } from '~/stores/cart'
-
-type Product = {
-  id: number
-  name: string
-  originalPrice: number
-  promoPrice?: number | null
-  discountPercent?: number
-  image: string
-  category: string
-  description?: string
-}
+import type { Product } from '~~/shared/types/product'
 
 const props = defineProps<{
   product: Product

@@ -1,4 +1,4 @@
-import type { CartItem } from '~~/shared/types/cart'
+import type { CartItem, OrderType } from '~~/shared/types/cart'
 import { defineStore } from 'pinia'
 
 export type Product = {
@@ -11,6 +11,11 @@ export type Product = {
 
 export const useCartStore = defineStore('cart', () => {
   const items = ref<CartItem[]>([])
+
+  // Order options
+  const orderType = ref<OrderType>('dine-in')
+  const tableNumber = ref<string>('')
+  const orderNote = ref<string>('')
   const getItemById = (id: number) => items.value.find(i => i.productId === id)?.quantity || 0
 
   // Getters
@@ -63,10 +68,25 @@ export const useCartStore = defineStore('cart', () => {
 
   function clear(){
     items.value = []
+    orderType.value = 'dine-in'
+    tableNumber.value = ''
+    orderNote.value = ''
   }
-   
-  
 
+  function setOrderType(type: OrderType) {
+    orderType.value = type
+    if (type === 'take-away') {
+      tableNumber.value = ''
+    }
+  }
+
+  function setTableNumber(table: string) {
+    tableNumber.value = table
+  }
+
+  function setOrderNote(note: string) {
+    orderNote.value = note
+  }
 
   return {
     items,
@@ -74,11 +94,17 @@ export const useCartStore = defineStore('cart', () => {
     subTotal,
     total,
     discount,
+    orderType,
+    tableNumber,
+    orderNote,
     addToCart,
     increase,
     decrease,
     remove,
     clear,
-    getItemById
+    getItemById,
+    setOrderType,
+    setTableNumber,
+    setOrderNote
   }
 })

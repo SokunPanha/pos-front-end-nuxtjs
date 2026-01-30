@@ -9,7 +9,7 @@ const cartStore = useCartStore()
     </UButton>
     <template #content>
       <div class="p-3">
-        <OrderMainCart  />
+        <OrderCartPanel />
       </div>
     </template>
   </UDrawer>
