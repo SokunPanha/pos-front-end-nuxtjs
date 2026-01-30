@@ -1,2 +1,21 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
+
+
+
+::-webkit-scrollbar {
+    width: 2px;
+    display: none;
+}
+
+::-webkit-scrollbar-track {
+    background: #01b816;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #2b2b2b;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #b50505;
+}

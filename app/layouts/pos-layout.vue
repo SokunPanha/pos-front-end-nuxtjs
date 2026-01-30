@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import AppHeader from '~/components/layouts/AppHeader.vue';
-import AppSidebar from '~/components/layouts/AppSidebar.vue';
 
 const isCollapsed = ref(false)
 </script>

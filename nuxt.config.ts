@@ -1,14 +1,17 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
-  imports: {
+  components: {
     dirs: [
-      'components/layouts/**',
+      'components/layouts/',
+      'components/pages/',
+      'components/features/',
+      'components/',
     ],
   },
   css: ["~/assets/css/main.css"],
   devtools: { enabled: true },
-  modules: ["@nuxt/image", "@nuxt/ui", "@nuxtjs/i18n"],
+  modules: ["@nuxt/image", "@nuxt/ui", "@nuxtjs/i18n", "@pinia/nuxt"],
   i18n: {
     defaultLocale: "kh",
     locales: [
