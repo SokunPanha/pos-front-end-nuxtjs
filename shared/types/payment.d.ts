@@ -8,6 +8,7 @@ export type PaymentState = {
 
 export type ReceiptData = {
   orderId: string
+  orderNumber: number
   orderType: 'dine-in' | 'take-away'
   tableNumber?: string
   items: {
@@ -22,4 +23,38 @@ export type ReceiptData = {
   cashReceived?: number
   change?: number
   timestamp: Date
+}
+
+// API Types
+export type Payment = {
+  id: string
+  orderId: string
+  method: PaymentMethod
+  amount: number
+  cashReceived?: number
+  change?: number
+  status: 'pending' | 'completed' | 'failed'
+  createdAt: string
+}
+
+export type CreatePaymentRequest = {
+  orderId: string
+  method: PaymentMethod
+  amount: number
+  cashReceived?: number
+}
+
+export type CreatePaymentResponse = {
+  success: boolean
+  payment: Payment
+  receipt: ReceiptData
+}
+
+export type PosSettings = {
+  exchangeRate: number
+  currency: {
+    primary: string
+    secondary: string
+  }
+  storeName: string
 }
