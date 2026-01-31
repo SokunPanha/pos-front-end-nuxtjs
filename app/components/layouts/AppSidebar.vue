@@ -1,47 +1,47 @@
 <script setup lang="ts">
 defineProps<{
-  collapsed: boolean
-}>()
+  collapsed: boolean;
+}>();
 
-import type { NavigationMenuItem } from '@nuxt/ui'
+import type { NavigationMenuItem } from "@nuxt/ui";
 
- const navigationItems: NavigationMenuItem[][] = [
+const navigationItems: NavigationMenuItem[][] = [
   [
     {
-      label: 'Guide',
-      icon: 'i-lucide-book-open',
+      label: "Guide",
+      icon: "i-lucide-book-open",
       children: [
         {
-          label: 'Introduction',
-          to: '/docs/introduction',
-          icon: 'i-lucide-house'
+          label: "Introduction",
+          to: "/docs/introduction",
+          icon: "i-lucide-house",
         },
         {
-          label: 'Installation',
-          icon: 'i-lucide-cloud-download'
-        }
-      ]
+          label: "Installation",
+          icon: "i-lucide-cloud-download",
+        },
+      ],
     },
     {
-      label: 'Components',
-      icon: 'i-lucide-box',
+      label: "Components",
+      icon: "i-lucide-box",
       children: [
         {
-          label: 'Modal',
-          to: '/docs/components/modal'
-        }
-      ]
-    }
+          label: "Modal",
+          to: "/docs/components/modal",
+        },
+      ],
+    },
   ],
   [
     {
-      label: 'GitHub',
-      icon: 'i-simple-icons-github',
-      to: 'https://github.com/nuxt/ui',
-      target: '_blank'
-    }
-  ]
-]
+      label: "GitHub",
+      icon: "i-simple-icons-github",
+      to: "https://github.com/nuxt/ui",
+      target: "_blank",
+    },
+  ],
+];
 </script>
 
 <template>

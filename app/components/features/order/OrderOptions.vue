@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { useCartStore } from '~/stores/cart'
+import { useCartStore } from "~/stores/cart";
 
-const cartStore = useCartStore()
-const showNote = ref(false)
+const cartStore = useCartStore();
+const showNote = ref(false);
 
 const orderTypeOptions = [
-  { label: 'Dine-in', value: 'dine-in' },
-  { label: 'Take-away', value: 'take-away' }
-]
+  { label: "Dine-in", value: "dine-in" },
+  { label: "Take-away", value: "take-away" },
+];
 </script>
 
 <template>
@@ -15,7 +15,7 @@ const orderTypeOptions = [
     <!-- Order Type Toggle -->
     <div class="flex gap-2">
       <UButton
-      class="cursor-pointer"
+        class="cursor-pointer"
         v-for="option in orderTypeOptions"
         :key="option.value"
         :color="cartStore.orderType === option.value ? 'primary' : 'neutral'"
@@ -39,7 +39,7 @@ const orderTypeOptions = [
     <!-- Collapsible Note -->
     <div>
       <UButton
-      class="cursor-pointer"
+        class="cursor-pointer"
         v-if="!showNote && !cartStore.orderNote"
         variant="ghost"
         size="xs"
@@ -49,7 +49,7 @@ const orderTypeOptions = [
         Add note
       </UButton>
       <UTextarea
-      class="cursor-pointer"
+        class="cursor-pointer"
         v-if="showNote || cartStore.orderNote"
         v-model="cartStore.orderNote"
         placeholder="Order notes..."

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import AppSidebar from './AppSidebar.vue';
+import AppSidebar from "./AppSidebar.vue";
 
-defineEmits(['toggle-sidebar'])
+defineEmits(["toggle-sidebar"]);
 </script>
 
 <template>
