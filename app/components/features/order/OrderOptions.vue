@@ -15,6 +15,7 @@ const orderTypeOptions = [
     <!-- Order Type Toggle -->
     <div class="flex gap-2">
       <UButton
+      class="cursor-pointer"
         v-for="option in orderTypeOptions"
         :key="option.value"
         :color="cartStore.orderType === option.value ? 'primary' : 'neutral'"
@@ -38,6 +39,7 @@ const orderTypeOptions = [
     <!-- Collapsible Note -->
     <div>
       <UButton
+      class="cursor-pointer"
         v-if="!showNote && !cartStore.orderNote"
         variant="ghost"
         size="xs"
@@ -47,6 +49,7 @@ const orderTypeOptions = [
         Add note
       </UButton>
       <UTextarea
+      class="cursor-pointer"
         v-if="showNote || cartStore.orderNote"
         v-model="cartStore.orderNote"
         placeholder="Order notes..."

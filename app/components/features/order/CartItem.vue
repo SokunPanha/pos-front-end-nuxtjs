@@ -32,17 +32,17 @@ const emit = defineEmits([
 
         <div class="flex gap-2 items-center"><!-- Quantity -->
             <div class="flex items-center gap-2">
-                <UButton size="xs" icon="i-heroicons-minus" @click="emit('decrease', item.productId)" />
+                <UButton class="cursor-pointer" size="xs" icon="i-heroicons-minus" @click="emit('decrease', item.productId)" />
 
                 <span class="w-5 text-center">
                     {{ item.quantity }}
                 </span>
 
-                <UButton size="xs" icon="i-heroicons-plus" @click="emit('increase', item.productId)" />
+                <UButton class="cursor-pointer" size="xs" icon="i-heroicons-plus" @click="emit('increase', item.productId)" />
             </div>
 
             <!-- Remove -->
-            <UButton color="error" variant="ghost" icon="i-heroicons-trash" @click="emit('remove', item.productId)" />
+            <UButton class="cursor-pointer" color="error" variant="ghost" icon="i-heroicons-trash" @click="emit('remove', item.productId)" />
         </div>
     </div>
 </template>

@@ -12,7 +12,7 @@ const layout = computed(() => {
 </script>
 
 <template>
-  <UApp>
+  <UApp :toaster="{ position: 'top-right' , duration: 5000}">
     <NuxtLayout :name="layout">
       <NuxtPage />
     </NuxtLayout>

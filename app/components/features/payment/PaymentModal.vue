@@ -88,6 +88,9 @@ function closeAndReset() {
   processingError.value = null
   isOpen.value = false
 }
+function closeModal(){
+  isOpen.value = false
+}
 
 function goBack() {
   paymentMethod.value = null
@@ -97,8 +100,11 @@ function goBack() {
 </script>
 
 <template>
-  <UModal v-model:open="isOpen" :ui="{ width: 'sm:max-w-md' }">
+  <UModal v-model:open="isOpen" >
+   
     <template #content>
+       <UButton @click="closeModal" icon="i-heroicons-x-mark" class="absolute top-2 right-2 cursor-pointer" color="neutral" variant="ghost" >
+    </UButton>
       <div class="p-4">
         <!-- Receipt View -->
         <PaymentReceipt

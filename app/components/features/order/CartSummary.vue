@@ -1,12 +1,40 @@
 <script setup lang="ts">
 import { useCartStore } from '~/stores/cart'
 
+
+const emit = defineEmits(['openOrder', 'openPayment'])
+
 const cartStore = useCartStore()
 const showPaymentModal = ref(false)
-
+const toast = useToast()
 function openPayment() {
+  if(cartStore.orderType === 'dine-in'){
+    if(cartStore.tableNumber === ""){
+      toast.add({
+        title: 'Please select a table',
+        color: 'warning',
+        duration: 5000,
+        icon: 'i-lucide-exclamation-triangle'
+      })
+      return
+    }
+  }
   if (cartStore.totalItems > 0) {
+    toast.clear()
     showPaymentModal.value = true
+  }
+}
+function openOrder() {
+  if(cartStore.orderType === 'dine-in'){
+    if(cartStore.tableNumber === ""){
+      toast.add({
+        title: 'Please select a table',
+        color: 'warning',
+        duration: 5000,
+        icon: 'i-lucide-exclamation-triangle'
+      })
+      return
+    }
   }
 }
 </script>
@@ -36,15 +64,27 @@ function openPayment() {
     </div>
 
     <template #footer>
-      <UButton
+     <div class="flex gap-2 flex-col">
+       <UButton
         block
         size="lg"
         color="primary"
+        class="cursor-pointer"
         :disabled="cartStore.totalItems === 0"
-        @click="openPayment"
+        @click="emit('openOrder')"
       >
         Place Order
       </UButton>
+            <UButton
+        block
+        size="lg"
+         class="bg-green-800! cursor-pointer"
+        :disabled="cartStore.totalItems === 0"
+        @click="emit('openPayment')"
+      >
+        Check Out
+      </UButton>
+     </div>
     </template>
   </UCard>
 
