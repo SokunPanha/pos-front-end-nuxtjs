@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@iconify-json/heroicons": "^1.2.3",
+    "@types/lodash": "^4.17.23",
     "@types/qrcode": "^1.5.6",
     "qrcode": "^1.5.4"
   }

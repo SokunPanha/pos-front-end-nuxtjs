@@ -52,7 +52,7 @@ const { t } = useI18n();
           :disabled="cartStore.totalItems === 0"
           @click="emit('openCheckout')"
         >
-          {{ t("label.checkOut") }}
+          {{ t("label") }}
         </UButton>
       </div>
     </template>

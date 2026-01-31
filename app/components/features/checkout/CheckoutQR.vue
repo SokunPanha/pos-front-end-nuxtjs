@@ -48,7 +48,7 @@ onMounted(async () => {
         icon="i-heroicons-arrow-left"
         @click="emit('back')"
       />
-      <h2 class="text-xl font-bold">{{ t('label.checkout.qrCheckout') }}</h2>
+      <h2 class="text-xl font-bold">{{ t("label.qrCheckout") }}</h2>
     </div>
 
     <!-- QR Code Display -->
@@ -64,7 +64,7 @@ onMounted(async () => {
       </div>
 
       <div class="mt-4 text-center">
-        <div class="text-sm text-gray-500">{{ t('label.checkout.scanToPay') }}</div>
+        <div class="text-sm text-gray-500">{{ t("label.scanToPay") }}</div>
         <div class="text-2xl font-bold text-primary">
           ${{ total.toFixed(2) }}
         </div>
@@ -73,13 +73,13 @@ onMounted(async () => {
 
     <!-- Instructions -->
     <div class="text-center text-sm text-gray-500">
-      <p>{{ t('label.checkout.scanInstructions') }}</p>
-      <p>{{ t('label.checkout.clickWhenComplete') }}</p>
+      <p>{{ t("label.scanInstructions") }}</p>
+      <p>{{ t("label.clickWhenComplete") }}</p>
     </div>
 
     <!-- Confirm Button -->
     <UButton block size="lg" color="primary" @click="emit('confirm')">
-      {{ t('label.checkout.paymentReceived') }}
+      {{ t("label.paymentReceived") }}
     </UButton>
   </div>
 </template>

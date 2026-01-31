@@ -24,7 +24,7 @@ const navigationItems = computed<NavigationMenuItem[][]>(() => [
           icon: "i-lucide-clock",
         },
         {
-          label: t("label.checkout"),
+          label: t("label"),
           to: "/pos/checkout",
           icon: "i-lucide-credit-card",
         },

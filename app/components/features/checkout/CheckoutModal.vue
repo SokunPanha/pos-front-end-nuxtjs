@@ -126,18 +126,20 @@ function goBack() {
             name="i-heroicons-arrow-path"
             class="text-4xl animate-spin text-primary"
           />
-          <p class="mt-2 text-gray-500">{{ t('label.checkout.processing') }}</p>
+          <p class="mt-2 text-gray-500">{{ t("label.processing") }}</p>
         </div>
 
         <!-- Error State -->
         <div v-else-if="processingError" class="py-4 text-center">
           <div class="text-red-500 mb-4">{{ processingError }}</div>
-          <UButton @click="goBack">{{ t('label.checkout.tryAgain') }}</UButton>
+          <UButton @click="goBack">{{ t("label.tryAgain") }}</UButton>
         </div>
 
         <!-- Payment Method Selection -->
         <div v-else-if="!paymentMethod" class="space-y-4">
-          <h2 class="text-xl font-bold text-center">{{ t('label.checkout.selectPaymentMethod') }}</h2>
+          <h2 class="text-xl font-bold text-center">
+            {{ t("label.selectPaymentMethod") }}
+          </h2>
 
           <div class="text-center text-2xl font-bold text-primary">
             ${{ cartStore.total.toFixed(2) }}
@@ -152,7 +154,7 @@ function goBack() {
               @click="selectMethod('cash')"
             >
               <UIcon name="i-heroicons-banknotes" class="text-3xl mb-2" />
-              <span>{{ t('label.checkout.cash') }}</span>
+              <span>{{ t("label.cash") }}</span>
             </UButton>
 
             <UButton
@@ -163,7 +165,7 @@ function goBack() {
               @click="selectMethod('qr')"
             >
               <UIcon name="i-heroicons-qr-code" class="text-3xl mb-2" />
-              <span>{{ t('label.checkout.qrCode') }}</span>
+              <span>{{ t("label.qrCode") }}</span>
             </UButton>
           </div>
         </div>
