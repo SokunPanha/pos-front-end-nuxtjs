@@ -1,6 +1,14 @@
 {
     "label": {
+        "authentication": "Authentication",
         "login": "Login",
+        "email": "Email",
+        "password": "Password",
+        "invalidEmail": "Invalid email",
+        "passwordRequired": "Password is required",
+        "passwordMinLength": "Must be at least 8 characters",
+        "success": "Success",
+        "formSubmitted": "The form has been submitted.",
         "orders": "Orders",
         "newOrders": "New Orders",
         "openOrders": "Open Orders",

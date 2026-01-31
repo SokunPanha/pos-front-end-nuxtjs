@@ -5,12 +5,15 @@ import type { FormSubmitEvent } from '@nuxt/ui'
 definePageMeta({
     layout: 'auth-layout'
 })
-const schema = z.object({
-    email: z.email('Invalid email'),
-    password: z.string('Password is required').min(8, 'Must be at least 8 characters')
-})
 
-type Schema = z.output<typeof schema>
+const { t } = useI18n()
+
+const schema = computed(() => z.object({
+    email: z.email(t('label.invalidEmail')),
+    password: z.string({ message: t('label.passwordRequired') }).min(8, t('label.passwordMinLength'))
+}))
+
+type Schema = { email: string; password: string }
 
 const state = reactive<Partial<Schema>>({
     email: undefined,
@@ -18,22 +21,21 @@ const state = reactive<Partial<Schema>>({
 })
 
 const toast = useToast()
-async function onSubmit(event: FormSubmitEvent<Schema>) {
-    toast.add({ title: 'Success', description: 'The form has been submitted.', color: 'success' })
-    console.log(event.data)
+async function onSubmit(_event: FormSubmitEvent<Schema>) {
+    toast.add({ title: t('label.success'), description: t('label.formSubmitted'), color: 'success' })
 }
 </script>
 
 <template>
     <main class=" flex h-screen justify-center w-full items-center">
         <div class=" max-w-[500px] w-100  p-10">
-            <h1 class="text-center text-2xl font-bold mb-3">Authentication</h1>
+            <h1 class="text-center text-2xl font-bold mb-3">{{ $t('label.authentication') }}</h1>
             <UForm :schema="schema" :state="state" class="space-y-4" @submit="onSubmit">
-                <UFormField label="Email" name="email">
+                <UFormField :label="$t('label.email')" name="email">
                     <UInput class="w-full" v-model="state.email" />
                 </UFormField>
 
-                <UFormField label="Password" name="password">
+                <UFormField :label="$t('label.password')" name="password">
                     <UInput class="w-full"  v-model="state.password" type="password" />
                 </UFormField>
 

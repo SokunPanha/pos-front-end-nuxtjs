@@ -1,6 +1,14 @@
 {
   "label": {
+    "authentication": "ការផ្ទៀងផ្ទាត់",
     "login": "ចូល",
+    "email": "អ៊ីមែល",
+    "password": "ពាក្យសម្ងាត់",
+    "invalidEmail": "អ៊ីមែលមិនត្រឹមត្រូវ",
+    "passwordRequired": "ពាក្យសម្ងាត់ត្រូវបានទាមទារ",
+    "passwordMinLength": "ត្រូវតែមានយ៉ាងហោចណាស់ ៨ តួអក្សរ",
+    "success": "ជោគជ័យ",
+    "formSubmitted": "ទម្រង់បានបញ្ជូនរួចរាល់។",
     "orders": "ការបញ្ជាទិញ",
     "newOrders": "បញ្ជាទិញថ្មី",
     "openOrders": "បញ្ជាទិញបើក",
