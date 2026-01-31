@@ -45,6 +45,7 @@
         "print": "Print",
         "done": "Done",
         "emptyCart": "Empty Cart",
-        "addToCart": "Add to Cart"
+        "addToCart": "Add to Cart",
+        "search": "Search"
     }
 }
