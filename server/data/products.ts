@@ -100,7 +100,18 @@ export const products: Product[] = [
     image: "https://bing.com/th?id=OSK.a8e12dd5d2ca9d1f5324721083c7beec",
     category: "Dessert",
     description: "Sticky rice with mango and coconut milk"
-  }
+  },
+  {
+    id: 11,
+    name: "Mango Sticky Rice",
+    originalPrice: 3.0,
+    promoPrice: 2.4,
+    discountPercent: 20,
+    image: "https://bing.com/th?id=OSK.a8e12dd5d2ca9d1f5324721083c7beec",
+    category: "Dessert",
+    description: "Sticky rice with mango and coconut milk"
+  },
+  
 ]
 
 export function getProducts(): Product[] {
@@ -117,4 +128,8 @@ export function getCategories(): string[] {
 
 export function getProductsByCategory(category: string): Product[] {
   return products.filter(p => p.category === category)
+}
+
+export function getProductsBySearch(search: string): Product[] {
+  return products.filter(p => p.name.toLowerCase().includes(search.toLowerCase()))
 }
