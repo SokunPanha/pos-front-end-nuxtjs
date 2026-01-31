@@ -3,18 +3,19 @@ import { useCartStore } from "~/stores/cart";
 
 const emit = defineEmits(["openOrder", "openCheckout"]);
 const cartStore = useCartStore();
+const { t } = useI18n();
 </script>
 
 <template>
   <UCard>
     <div class="space-y-2 text-sm">
       <div class="flex justify-between">
-        <span>Items</span>
+        <span>{{ t("label.items") }}</span>
         <span>{{ cartStore.totalItems }}</span>
       </div>
 
       <div class="flex justify-between">
-        <span>Subtotal</span>
+        <span>{{ t("label.subtotal") }}</span>
         <span>${{ cartStore.subTotal.toFixed(2) }}</span>
       </div>
 
@@ -22,12 +23,12 @@ const cartStore = useCartStore();
         v-if="cartStore.discount > 0"
         class="flex justify-between text-green-600"
       >
-        <span>Discount</span>
+        <span>{{ t("label.discount") }}</span>
         <span>- ${{ cartStore.discount.toFixed(2) }}</span>
       </div>
 
       <div class="flex justify-between font-semibold text-base">
-        <span>Total</span>
+        <span>{{ t("label.total") }}</span>
         <span>${{ cartStore.total.toFixed(2) }}</span>
       </div>
     </div>
@@ -42,16 +43,16 @@ const cartStore = useCartStore();
           :disabled="cartStore.totalItems === 0"
           @click="emit('openOrder')"
         >
-          Place Order
+          {{ t("label.placeOrder") }}
         </UButton>
         <UButton
           block
           size="lg"
-          class="bg-green-800! cursor-pointer"
+          class="bg-green-800! dark:bg-green-500! cursor-pointer"
           :disabled="cartStore.totalItems === 0"
           @click="emit('openCheckout')"
         >
-          Check Out
+          {{ t("label.checkOut") }}
         </UButton>
       </div>
     </template>

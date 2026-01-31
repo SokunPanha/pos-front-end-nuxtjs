@@ -1,5 +1,6 @@
-<script setup>
+<script setup lang="ts">
 const colorMode = useColorMode();
+const { t } = useI18n();
 </script>
 
 <template>
@@ -11,7 +12,11 @@ const colorMode = useColorMode();
       "
       variant="ghost"
     >
-      {{ colorMode.value === "dark" ? "🌙 Dark" : "☀️ Light" }}
+      {{
+        colorMode.value === "dark"
+          ? `🌙 ${t("label.dark")}`
+          : `☀️ ${t("label.light")}`
+      }}
     </UButton>
   </ClientOnly>
 </template>

@@ -2,12 +2,13 @@
 const showCheckoutModal = ref(false);
 const cartStore = useCartStore();
 const toast = useToast();
+const { t } = useI18n();
 
 function openCheckout() {
   if (cartStore.orderType === "dine-in") {
     if (cartStore.tableNumber === "") {
       toast.add({
-        title: "Please select a table",
+        title: t("message.pleaseSelectTable"),
         color: "warning",
         duration: 5000,
         icon: "i-lucide-exclamation-triangle",
@@ -24,7 +25,7 @@ function openOrder() {
   if (cartStore.orderType === "dine-in") {
     if (cartStore.tableNumber === "") {
       toast.add({
-        title: "Please select a table",
+        title: t("message.pleaseSelectTable"),
         color: "warning",
         duration: 5000,
         icon: "i-lucide-exclamation-triangle",
@@ -37,18 +38,11 @@ function openOrder() {
 
 <template>
   <main class="flex flex-col justify-between h-full">
-    <h1 class="text-2xl overflow-hidden font-bold py-3">Order Details</h1>
+    <h1 class="text-2xl overflow-hidden font-bold py-3">
+      {{ t("label.orderDetails") }}
+    </h1>
     <OrderOptions />
-    <OrderCardGrid>
-      <OrderCard
-        v-for="item in cartStore.items"
-        :key="item.id"
-        :item="item"
-        @increase="cartStore.increase"
-        @decrease="cartStore.decrease"
-        @remove="cartStore.remove"
-      />
-    </OrderCardGrid>
+    <OrderCardGrid> </OrderCardGrid>
     <OrderCardSummary @open-order="openOrder" @open-checkout="openCheckout" />
     <CheckoutModal v-model:open="showCheckoutModal" />
   </main>

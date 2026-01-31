@@ -1,0 +1,7 @@
+{
+    "message": {
+        "pleaseSelectTable": "សូមជ្រើសរើសតុ",
+        "failedToCreateOrder": "បរាជ័យក្នុងការបង្កើតបញ្ជាទិញ",
+        "failedToProcessPayment": "បរាជ័យក្នុងការដំណើរការបង់ប្រាក់"
+    }
+}

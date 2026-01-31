@@ -66,13 +66,13 @@ function handleAddToCart() {
     <template #footer>
       <UButton
         v-if="cartStore.getItemById(props.product.id) == 0"
-        class="cursor-pointer text-black"
+        class="cursor-pointer  text-white"
         block
         color="primary"
         icon="i-heroicons-shopping-cart"
         @click="handleAddToCart"
       >
-        Add to cart
+        {{ $t("label.addToCart") }}
       </UButton>
       <div
         v-if="cartStore.getItemById(props.product.id) > 0"

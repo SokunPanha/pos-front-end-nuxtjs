@@ -5,43 +5,38 @@ defineProps<{
 
 import type { NavigationMenuItem } from "@nuxt/ui";
 
-const navigationItems: NavigationMenuItem[][] = [
+const { t } = useI18n();
+
+const navigationItems = computed<NavigationMenuItem[][]>(() => [
   [
     {
-      label: "Guide",
-      icon: "i-lucide-book-open",
+      label: t("label.orders"),
+      icon: "i-lucide-shopping-cart",
       children: [
         {
-          label: "Introduction",
-          to: "/docs/introduction",
-          icon: "i-lucide-house",
+          label: t("label.newOrders"),
+          to: "/pos/order",
+          icon: "i-lucide-plus-circle",
         },
         {
-          label: "Installation",
-          icon: "i-lucide-cloud-download",
+          label: t("label.openOrders"),
+          to: "/pos/orders/open",
+          icon: "i-lucide-clock",
         },
-      ],
-    },
-    {
-      label: "Components",
-      icon: "i-lucide-box",
-      children: [
         {
-          label: "Modal",
-          to: "/docs/components/modal",
+          label: t("label.checkout"),
+          to: "/pos/checkout",
+          icon: "i-lucide-credit-card",
+        },
+        {
+          label: t("label.orderHistory"),
+          to: "/pos/orders/history",
+          icon: "i-lucide-history",
         },
       ],
     },
   ],
-  [
-    {
-      label: "GitHub",
-      icon: "i-simple-icons-github",
-      to: "https://github.com/nuxt/ui",
-      target: "_blank",
-    },
-  ],
-];
+]);
 </script>
 
 <template>

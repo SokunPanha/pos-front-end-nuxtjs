@@ -9,6 +9,8 @@ const emit = defineEmits<{
   done: [];
 }>();
 
+const { t } = useI18n();
+
 const formattedDate = computed(() => {
   return props.receipt.timestamp.toLocaleString();
 });

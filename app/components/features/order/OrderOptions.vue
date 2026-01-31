@@ -3,11 +3,12 @@ import { useCartStore } from "~/stores/cart";
 
 const cartStore = useCartStore();
 const showNote = ref(false);
+const { t } = useI18n();
 
-const orderTypeOptions = [
-  { label: "Dine-in", value: "dine-in" },
-  { label: "Take-away", value: "take-away" },
-];
+const orderTypeOptions = computed(() => [
+  { label: t("label.dineIn"), value: "dine-in" },
+  { label: t("label.takeAway"), value: "take-away" },
+]);
 </script>
 
 <template>
@@ -31,7 +32,7 @@ const orderTypeOptions = [
     <UInput
       v-if="cartStore.orderType === 'dine-in'"
       v-model="cartStore.tableNumber"
-      placeholder="Table number"
+      :placeholder="$t('placeholder.tableNumber')"
       size="sm"
       icon="i-heroicons-hashtag"
     />
@@ -46,13 +47,13 @@ const orderTypeOptions = [
         icon="i-heroicons-plus"
         @click="showNote = true"
       >
-        Add note
+        {{ t("label.addNote") }}
       </UButton>
       <UTextarea
         class="cursor-pointer"
         v-if="showNote || cartStore.orderNote"
         v-model="cartStore.orderNote"
-        placeholder="Order notes..."
+        :placeholder="$t('placeholder.orderNotes')"
         size="sm"
         :rows="2"
       />

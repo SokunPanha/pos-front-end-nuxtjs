@@ -14,6 +14,8 @@ const emit = defineEmits<{
   back: [];
 }>();
 
+const { t } = useI18n();
+
 // Currency state
 const currency = ref<Currency>("USD");
 const rate = computed(() => props.exchangeRate || 4100);
@@ -106,12 +108,12 @@ function formatKHR(value: number): string {
         icon="i-heroicons-arrow-left"
         @click="emit('back')"
       />
-      <h2 class="text-xl font-bold">Cash Checkout</h2>
+      <h2 class="text-xl font-bold">{{ t('label.checkout.cashCheckout') }}</h2>
     </div>
 
     <!-- Total Due -->
     <div class="text-center p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
-      <div class="text-sm text-gray-500">Total Due</div>
+      <div class="text-sm text-gray-500">{{ t('label.checkout.totalDue') }}</div>
       <div class="text-3xl font-bold text-primary">${{ total.toFixed(2) }}</div>
       <div class="text-sm text-gray-500">≈ {{ formatKHR(totalInKHR) }} ៛</div>
     </div>
@@ -149,7 +151,7 @@ function formatKHR(value: number): string {
     <!-- Cash Received Input -->
     <div>
       <label class="text-sm font-medium mb-1 block"
-        >Cash Received ({{ currency }})</label
+        >{{ t('label.checkout.cashReceived') }} ({{ currency }})</label
       >
       <UInput
         v-model.number="inputAmount"
@@ -179,10 +181,10 @@ function formatKHR(value: number): string {
         +{{ currency === "USD" ? `$${amount}` : `${formatKHR(amount)}៛` }}
       </UButton>
       <UButton size="sm" variant="outline" @click="setExactAmount">
-        Exact
+        {{ t('label.checkout.exact') }}
       </UButton>
       <UButton size="sm" variant="ghost" color="error" @click="clearAmount">
-        Clear
+        {{ t('label.checkout.clear') }}
       </UButton>
     </div>
 
@@ -204,7 +206,7 @@ function formatKHR(value: number): string {
             : 'text-red-600 dark:text-red-400'
         "
       >
-        {{ canConfirm ? "Change" : "Insufficient Amount" }}
+        {{ canConfirm ? t('label.checkout.change') : t('label.checkout.insufficientAmount') }}
       </div>
       <div
         class="text-2xl font-bold"
@@ -226,7 +228,7 @@ function formatKHR(value: number): string {
 
     <!-- Exchange Rate Info -->
     <div class="text-center text-xs text-gray-400">
-      Exchange rate: 1 USD = {{ formatKHR(rate) }} KHR
+      {{ t('label.checkout.exchangeRate') }}: 1 USD = {{ formatKHR(rate) }} KHR
     </div>
 
     <!-- Confirm Button -->
@@ -237,7 +239,7 @@ function formatKHR(value: number): string {
       :disabled="!canConfirm"
       @click="emit('confirm')"
     >
-      Confirm Checkout
+      {{ t('label.checkout.confirmCheckout') }}
     </UButton>
   </div>
 </template>

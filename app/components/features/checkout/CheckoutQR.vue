@@ -10,6 +10,8 @@ const emit = defineEmits<{
   back: [];
 }>();
 
+const { t } = useI18n();
+
 const qrDataUrl = ref<string>("");
 const orderId = `ORD-${Date.now()}`;
 
@@ -46,7 +48,7 @@ onMounted(async () => {
         icon="i-heroicons-arrow-left"
         @click="emit('back')"
       />
-      <h2 class="text-xl font-bold">QR Code Checkout</h2>
+      <h2 class="text-xl font-bold">{{ t('label.checkout.qrCheckout') }}</h2>
     </div>
 
     <!-- QR Code Display -->
@@ -62,7 +64,7 @@ onMounted(async () => {
       </div>
 
       <div class="mt-4 text-center">
-        <div class="text-sm text-gray-500">Scan to pay</div>
+        <div class="text-sm text-gray-500">{{ t('label.checkout.scanToPay') }}</div>
         <div class="text-2xl font-bold text-primary">
           ${{ total.toFixed(2) }}
         </div>
@@ -71,13 +73,13 @@ onMounted(async () => {
 
     <!-- Instructions -->
     <div class="text-center text-sm text-gray-500">
-      <p>Scan the QR code with your banking app</p>
-      <p>Click "Payment Received" once payment is complete</p>
+      <p>{{ t('label.checkout.scanInstructions') }}</p>
+      <p>{{ t('label.checkout.clickWhenComplete') }}</p>
     </div>
 
     <!-- Confirm Button -->
     <UButton block size="lg" color="primary" @click="emit('confirm')">
-      Payment Received
+      {{ t('label.checkout.paymentReceived') }}
     </UButton>
   </div>
 </template>

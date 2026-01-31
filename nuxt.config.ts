@@ -14,8 +14,8 @@ export default defineNuxtConfig({
   i18n: {
     defaultLocale: "kh",
     locales: [
-      { code: "en", name: "English", files: ['en/label.json'] },
-      { code: "kh", name: "Khmer", files: ['kh/label.json'] },
+      { code: "en", name: "English", files: ['en/label.json', 'en/placeholder.json', 'en/message.json'] },
+      { code: "kh", name: "Khmer", files: ['kh/label.json', 'kh/placeholder.json', 'kh/message.json'] },
     ],
     strategy: "no_prefix",
   },

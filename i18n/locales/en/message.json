@@ -1,0 +1,7 @@
+{
+    "message": {
+        "pleaseSelectTable": "Please select a table",
+        "failedToCreateOrder": "Failed to create order",
+        "failedToProcessPayment": "Failed to process payment"
+    }
+}
