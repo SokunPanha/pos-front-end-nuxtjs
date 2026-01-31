@@ -6,7 +6,10 @@ const cartStore = useCartStore();
 
 <template>
   <div class="overflow-y-auto flex-1 py-4">
-    <div v-if="cartStore.totalItems > 0" class="space-y-3 overflow-y-auto h-full">
+    <div
+      v-if="cartStore.totalItems > 0"
+      class="space-y-3 overflow-y-auto h-full"
+    >
       <OrderCard
         v-for="item in cartStore.items"
         :key="item.id"
@@ -17,7 +20,7 @@ const cartStore = useCartStore();
       />
     </div>
     <div v-else class="flex items-center justify-center h-full">
-      <span class="text-gray-500">{{ $t('label.emptyCart') }}</span>
+      <span class="text-gray-500">{{ $t("label.emptyCart") }}</span>
     </div>
   </div>
 </template>
