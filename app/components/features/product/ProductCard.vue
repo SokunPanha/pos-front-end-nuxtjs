@@ -66,7 +66,7 @@ function handleAddToCart() {
     <template #footer>
       <UButton
         v-if="cartStore.getItemById(props.product.id) == 0"
-        class="cursor-pointer  text-white"
+        class="cursor-pointer text-white"
         block
         color="primary"
         icon="i-heroicons-shopping-cart"
@@ -74,6 +74,7 @@ function handleAddToCart() {
       >
         {{ $t("label.addToCart") }}
       </UButton>
+
       <div
         v-if="cartStore.getItemById(props.product.id) > 0"
         class="flex gap-2 items-center justify-center"
@@ -81,7 +82,6 @@ function handleAddToCart() {
         <!-- Quantity -->
         <div class="flex items-center gap-2">
           <UButton
-            class="cursor-pointer"
             size="xs"
             icon="i-heroicons-minus"
             @click="cartStore.decrease(props.product.id)"
@@ -92,7 +92,6 @@ function handleAddToCart() {
           </span>
 
           <UButton
-            class="cursor-pointer"
             size="xs"
             icon="i-heroicons-plus"
             @click="cartStore.increase(props.product.id)"
@@ -101,7 +100,6 @@ function handleAddToCart() {
 
         <!-- Remove -->
         <UButton
-          class="cursor-pointer"
           color="error"
           variant="ghost"
           icon="i-heroicons-trash"

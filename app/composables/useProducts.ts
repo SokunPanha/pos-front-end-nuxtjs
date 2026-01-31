@@ -6,15 +6,13 @@ export function useProducts() {
   const loading = ref(false)
   const error = ref<string | null>(null)
 
-  async function fetchProducts(category?: string) {
+  async function fetchProducts({category, search}: {category?: string, search?: string}) {
     loading.value = true
     error.value = null
 
     try {
-      const query = category ? `?category=${encodeURIComponent(category)}` : ''
-      const response = await $fetch<{ success: boolean; products: Product[] }>(
-        `/api/pos/products${query}`
-      )
+      const query = category || search ? `?category=${encodeURIComponent(category || '')}&search=${encodeURIComponent(search || '')}` : ''
+      const response = await $fetch<{ success: boolean; products: Product[] }>(`/api/pos/products${query}`)
       products.value = response.products
     } catch (e) {
       error.value = e instanceof Error ? e.message : 'Failed to fetch products'
@@ -29,8 +27,8 @@ export function useProducts() {
         '/api/pos/categories'
       )
       categories.value = response.categories
-    } catch (e) {
-      console.error('Failed to fetch categories:', e)
+    } catch {
+      // silently fail
     }
   }
 
