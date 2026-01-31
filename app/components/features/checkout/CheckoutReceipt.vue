@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import type { ReceiptData } from '~~/shared/types/payment'
+import type { ReceiptData } from "~~/shared/types/payment";
 
 const props = defineProps<{
-  receipt: ReceiptData
-}>()
+  receipt: ReceiptData;
+}>();
 
 const emit = defineEmits<{
-  done: []
-}>()
+  done: [];
+}>();
 
 const formattedDate = computed(() => {
-  return props.receipt.timestamp.toLocaleString()
-})
+  return props.receipt.timestamp.toLocaleString();
+});
 
 function printReceipt() {
-  const printWindow = window.open('', '_blank', 'width=300,height=600')
-  if (!printWindow) return
+  const printWindow = window.open("", "_blank", "width=300,height=600");
+  if (!printWindow) return;
 
   const receiptHTML = `
     <!DOCTYPE html>
@@ -65,26 +65,34 @@ function printReceipt() {
         <span>Order Type:</span>
         <span class="bold">${props.receipt.orderType.toUpperCase()}</span>
       </div>
-      ${props.receipt.tableNumber ? `
+      ${
+        props.receipt.tableNumber
+          ? `
       <div class="row">
         <span>Table:</span>
         <span class="bold">#${props.receipt.tableNumber}</span>
       </div>
-      ` : ''}
+      `
+          : ""
+      }
       <div class="row">
         <span>Payment:</span>
-        <span class="bold">${props.receipt.paymentMethod === 'qr' ? 'QR Code' : 'Cash'}</span>
+        <span class="bold">${props.receipt.paymentMethod === "qr" ? "QR Code" : "Cash"}</span>
       </div>
 
       <div class="divider"></div>
 
       <div class="items">
-        ${props.receipt.items.map(item => `
+        ${props.receipt.items
+          .map(
+            (item) => `
           <div class="row">
             <span class="item-name">${item.quantity}x ${item.name}</span>
             <span>$${(item.price * item.quantity).toFixed(2)}</span>
           </div>
-        `).join('')}
+        `,
+          )
+          .join("")}
       </div>
 
       <div class="divider"></div>
@@ -93,18 +101,24 @@ function printReceipt() {
         <span>Subtotal:</span>
         <span>$${props.receipt.subtotal.toFixed(2)}</span>
       </div>
-      ${props.receipt.discount > 0 ? `
+      ${
+        props.receipt.discount > 0
+          ? `
       <div class="row">
         <span>Discount:</span>
         <span>-$${props.receipt.discount.toFixed(2)}</span>
       </div>
-      ` : ''}
+      `
+          : ""
+      }
       <div class="row total-row">
         <span>TOTAL:</span>
         <span>$${props.receipt.total.toFixed(2)}</span>
       </div>
 
-      ${props.receipt.paymentMethod === 'cash' ? `
+      ${
+        props.receipt.paymentMethod === "cash"
+          ? `
       <div class="divider"></div>
       <div class="row">
         <span>Cash Received:</span>
@@ -114,7 +128,9 @@ function printReceipt() {
         <span>Change:</span>
         <span>$${props.receipt.change?.toFixed(2)}</span>
       </div>
-      ` : ''}
+      `
+          : ""
+      }
 
       <div class="divider"></div>
 
@@ -133,10 +149,10 @@ function printReceipt() {
       <\/script>
     </body>
     </html>
-  `
+  `;
 
-  printWindow.document.write(receiptHTML)
-  printWindow.document.close()
+  printWindow.document.write(receiptHTML);
+  printWindow.document.close();
 }
 </script>
 
@@ -144,10 +160,17 @@ function printReceipt() {
   <div class="space-y-4">
     <!-- Success Header -->
     <div class="text-center">
-      <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center">
-        <UIcon name="i-heroicons-check" class="text-3xl text-green-600 dark:text-green-400" />
+      <div
+        class="w-16 h-16 mx-auto mb-3 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center"
+      >
+        <UIcon
+          name="i-heroicons-check"
+          class="text-3xl text-green-600 dark:text-green-400"
+        />
       </div>
-      <h2 class="text-xl font-bold text-green-600 dark:text-green-400">Payment Successful</h2>
+      <h2 class="text-xl font-bold text-green-600 dark:text-green-400">
+        Checkout Successful
+      </h2>
       <p class="text-sm text-gray-500">{{ receipt.orderId }}</p>
     </div>
 
@@ -171,10 +194,12 @@ function printReceipt() {
 
       <div class="flex justify-between text-sm">
         <span class="text-gray-500">Payment</span>
-        <span class="font-medium capitalize">{{ receipt.paymentMethod === 'qr' ? 'QR Code' : 'Cash' }}</span>
+        <span class="font-medium capitalize">{{
+          receipt.paymentMethod === "qr" ? "QR Code" : "Cash"
+        }}</span>
       </div>
 
-      <hr class="border-gray-200 dark:border-gray-700">
+      <hr class="border-gray-200 dark:border-gray-700" />
 
       <!-- Items -->
       <div class="space-y-2">
@@ -188,7 +213,7 @@ function printReceipt() {
         </div>
       </div>
 
-      <hr class="border-gray-200 dark:border-gray-700">
+      <hr class="border-gray-200 dark:border-gray-700" />
 
       <!-- Totals -->
       <div class="space-y-1">
@@ -197,7 +222,10 @@ function printReceipt() {
           <span>${{ receipt.subtotal.toFixed(2) }}</span>
         </div>
 
-        <div v-if="receipt.discount > 0" class="flex justify-between text-sm text-green-600">
+        <div
+          v-if="receipt.discount > 0"
+          class="flex justify-between text-sm text-green-600"
+        >
           <span>Discount</span>
           <span>-${{ receipt.discount.toFixed(2) }}</span>
         </div>
@@ -210,7 +238,7 @@ function printReceipt() {
 
       <!-- Cash Payment Details -->
       <template v-if="receipt.paymentMethod === 'cash'">
-        <hr class="border-gray-200 dark:border-gray-700">
+        <hr class="border-gray-200 dark:border-gray-700" />
 
         <div class="space-y-1">
           <div class="flex justify-between text-sm">
@@ -238,12 +266,7 @@ function printReceipt() {
       >
         Print
       </UButton>
-      <UButton
-        class="flex-1"
-        size="lg"
-        color="primary"
-        @click="emit('done')"
-      >
+      <UButton class="flex-1" size="lg" color="primary" @click="emit('done')">
         Done
       </UButton>
     </div>

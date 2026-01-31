@@ -1,64 +1,65 @@
 <script setup lang="ts">
-import { useCartStore } from '~/stores/cart'
-import { useOrders } from '~/composables/useOrders'
-import type { PaymentMethod, ReceiptData } from '~~/shared/types/payment'
+import { useCartStore } from "~/stores/cart";
+import { useOrders } from "~/composables/useOrders";
+import type { PaymentMethod, ReceiptData } from "~~/shared/types/payment";
 
-const cartStore = useCartStore()
-const { createOrder, processPayment, loading, error } = useOrders()
+const cartStore = useCartStore();
+const { createOrder, processPayment, loading, error } = useOrders();
 
-const isOpen = defineModel<boolean>('open', { default: false })
-const paymentMethod = ref<PaymentMethod | null>(null)
-const cashReceived = ref(0)
-const isPaid = ref(false)
-const receiptData = ref<ReceiptData | null>(null)
-const processingError = ref<string | null>(null)
+const isOpen = defineModel<boolean>("open", { default: false });
+const paymentMethod = ref<PaymentMethod | null>(null);
+const cashReceived = ref(0);
+const isPaid = ref(false);
+const receiptData = ref<ReceiptData | null>(null);
+const processingError = ref<string | null>(null);
 
 const change = computed(() => {
   if (cashReceived.value >= cartStore.total) {
-    return cashReceived.value - cartStore.total
+    return cashReceived.value - cartStore.total;
   }
-  return 0
-})
+  return 0;
+});
 
 function selectMethod(method: PaymentMethod) {
-  paymentMethod.value = method
-  cashReceived.value = 0
-  processingError.value = null
+  paymentMethod.value = method;
+  cashReceived.value = 0;
+  processingError.value = null;
 }
 
-async function confirmCashPayment() {
+async function confirmCashCheckout() {
   if (cashReceived.value >= cartStore.total) {
-    await completePayment('cash')
+    await completeCheckout("cash");
   }
 }
 
-async function confirmQRPayment() {
-  await completePayment('qr')
+async function confirmQRCheckout() {
+  await completeCheckout("qr");
 }
 
-async function completePayment(method: PaymentMethod) {
-  processingError.value = null
+async function completeCheckout(method: PaymentMethod) {
+  processingError.value = null;
 
   // Step 1: Create the order
   const order = await createOrder({
     orderType: cartStore.orderType,
-    tableNumber: cartStore.orderType === 'dine-in' ? cartStore.tableNumber : undefined,
+    tableNumber:
+      cartStore.orderType === "dine-in" ? cartStore.tableNumber : undefined,
     note: cartStore.orderNote || undefined,
-    items: cartStore.items.map(item => ({
+    items: cartStore.items.map((item) => ({
       productId: item.productId,
       name: item.name,
       price: item.price,
       originalPrice: item.originalPrice,
-      quantity: item.quantity
+      quantity: item.quantity,
     })),
     subtotal: cartStore.subTotal,
     discount: cartStore.discount,
-    total: cartStore.total
-  })
+    total: cartStore.total,
+  });
 
   if (!order) {
-    processingError.value = error.value || 'Failed to create order'
-    return
+    processingError.value = error.value || "Failed to create order";
+    return;
   }
 
   // Step 2: Process the payment
@@ -66,48 +67,53 @@ async function completePayment(method: PaymentMethod) {
     orderId: order.id,
     method,
     amount: cartStore.total,
-    cashReceived: method === 'cash' ? cashReceived.value : undefined
-  })
+    cashReceived: method === "cash" ? cashReceived.value : undefined,
+  });
 
   if (!paymentResult) {
-    processingError.value = error.value || 'Failed to process payment'
-    return
+    processingError.value = error.value || "Failed to process payment";
+    return;
   }
 
   // Step 3: Show receipt
-  receiptData.value = paymentResult.receipt
-  isPaid.value = true
+  receiptData.value = paymentResult.receipt;
+  isPaid.value = true;
 }
 
 function closeAndReset() {
-  cartStore.clear()
-  paymentMethod.value = null
-  cashReceived.value = 0
-  isPaid.value = false
-  receiptData.value = null
-  processingError.value = null
-  isOpen.value = false
+  cartStore.clear();
+  paymentMethod.value = null;
+  cashReceived.value = 0;
+  isPaid.value = false;
+  receiptData.value = null;
+  processingError.value = null;
+  isOpen.value = false;
 }
-function closeModal(){
-  isOpen.value = false
+function closeModal() {
+  isOpen.value = false;
 }
 
 function goBack() {
-  paymentMethod.value = null
-  cashReceived.value = 0
-  processingError.value = null
+  paymentMethod.value = null;
+  cashReceived.value = 0;
+  processingError.value = null;
 }
 </script>
 
 <template>
-  <UModal v-model:open="isOpen" >
-   
+  <UModal v-model:open="isOpen">
     <template #content>
-       <UButton @click="closeModal" icon="i-heroicons-x-mark" class="absolute top-2 right-2 cursor-pointer" color="neutral" variant="ghost" >
-    </UButton>
+      <UButton
+        @click="closeModal"
+        icon="i-heroicons-x-mark"
+        class="absolute top-2 right-2 cursor-pointer"
+        color="neutral"
+        variant="ghost"
+      >
+      </UButton>
       <div class="p-4">
         <!-- Receipt View -->
-        <PaymentReceipt
+        <CheckoutReceipt
           v-if="isPaid && receiptData"
           :receipt="receiptData"
           @done="closeAndReset"
@@ -115,7 +121,10 @@ function goBack() {
 
         <!-- Loading State -->
         <div v-else-if="loading" class="py-8 text-center">
-          <UIcon name="i-heroicons-arrow-path" class="text-4xl animate-spin text-primary" />
+          <UIcon
+            name="i-heroicons-arrow-path"
+            class="text-4xl animate-spin text-primary"
+          />
           <p class="mt-2 text-gray-500">Processing...</p>
         </div>
 
@@ -158,21 +167,21 @@ function goBack() {
           </div>
         </div>
 
-        <!-- Cash Payment -->
-        <PaymentCash
+        <!-- Cash Checkout -->
+        <CheckoutCash
           v-else-if="paymentMethod === 'cash'"
           v-model:cash-received="cashReceived"
           :total="cartStore.total"
           :change="change"
-          @confirm="confirmCashPayment"
+          @confirm="confirmCashCheckout"
           @back="goBack"
         />
 
-        <!-- QR Payment -->
-        <PaymentQR
+        <!-- QR Checkout -->
+        <CheckoutQR
           v-else-if="paymentMethod === 'qr'"
           :total="cartStore.total"
-          @confirm="confirmQRPayment"
+          @confirm="confirmQRCheckout"
           @back="goBack"
         />
       </div>

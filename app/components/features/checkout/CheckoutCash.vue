@@ -1,107 +1,112 @@
 <script setup lang="ts">
-type Currency = 'USD' | 'KHR'
+type Currency = "USD" | "KHR";
 
 const props = defineProps<{
-  total: number
-  change: number
-  exchangeRate?: number
-}>()
+  total: number;
+  change: number;
+  exchangeRate?: number;
+}>();
 
-const cashReceived = defineModel<number>('cashReceived', { default: 0 })
+const cashReceived = defineModel<number>("cashReceived", { default: 0 });
 
 const emit = defineEmits<{
-  confirm: []
-  back: []
-}>()
+  confirm: [];
+  back: [];
+}>();
 
 // Currency state
-const currency = ref<Currency>('USD')
-const rate = computed(() => props.exchangeRate || 4100)
+const currency = ref<Currency>("USD");
+const rate = computed(() => props.exchangeRate || 4100);
 
 // Convert total to KHR for display
-const totalInKHR = computed(() => Math.round(props.total * rate.value))
+const totalInKHR = computed(() => Math.round(props.total * rate.value));
 
 // Amount in the current currency
-const inputAmount = ref(0)
+const inputAmount = ref(0);
 
 // Convert input to USD for comparison
 const receivedInUSD = computed(() => {
-  if (currency.value === 'USD') {
-    return inputAmount.value
+  if (currency.value === "USD") {
+    return inputAmount.value;
   }
-  return inputAmount.value / rate.value
-})
+  return inputAmount.value / rate.value;
+});
 
 // Update parent's cashReceived (always in USD)
 watch(receivedInUSD, (val) => {
-  cashReceived.value = val
-})
+  cashReceived.value = val;
+});
 
-const canConfirm = computed(() => receivedInUSD.value >= props.total)
+const canConfirm = computed(() => receivedInUSD.value >= props.total);
 
 // Change calculation
 const changeInUSD = computed(() => {
   if (receivedInUSD.value >= props.total) {
-    return receivedInUSD.value - props.total
+    return receivedInUSD.value - props.total;
   }
-  return 0
-})
+  return 0;
+});
 
-const changeInKHR = computed(() => Math.round(changeInUSD.value * rate.value))
+const changeInKHR = computed(() => Math.round(changeInUSD.value * rate.value));
 
 const shortfall = computed(() => {
   if (receivedInUSD.value < props.total) {
-    return props.total - receivedInUSD.value
+    return props.total - receivedInUSD.value;
   }
-  return 0
-})
+  return 0;
+});
 
 // Quick amount buttons based on currency
-const quickAmountsUSD = [1, 5, 10, 20, 50, 100]
-const quickAmountsKHR = [1000, 5000, 10000, 20000, 50000, 100000]
+const quickAmountsUSD = [1, 5, 10, 20, 50, 100];
+const quickAmountsKHR = [1000, 5000, 10000, 20000, 50000, 100000];
 
 const quickAmounts = computed(() => {
-  return currency.value === 'USD' ? quickAmountsUSD : quickAmountsKHR
-})
+  return currency.value === "USD" ? quickAmountsUSD : quickAmountsKHR;
+});
 
 function toggleCurrency() {
   // Convert current amount to new currency
-  if (currency.value === 'USD') {
-    currency.value = 'KHR'
-    inputAmount.value = Math.round(inputAmount.value * rate.value)
+  if (currency.value === "USD") {
+    currency.value = "KHR";
+    inputAmount.value = Math.round(inputAmount.value * rate.value);
   } else {
-    currency.value = 'USD'
-    inputAmount.value = Number((inputAmount.value / rate.value).toFixed(2))
+    currency.value = "USD";
+    inputAmount.value = Number((inputAmount.value / rate.value).toFixed(2));
   }
 }
 
 function addAmount(amount: number) {
-  inputAmount.value += amount
+  inputAmount.value += amount;
 }
 
 function setExactAmount() {
-  if (currency.value === 'USD') {
-    inputAmount.value = props.total
+  if (currency.value === "USD") {
+    inputAmount.value = props.total;
   } else {
-    inputAmount.value = totalInKHR.value
+    inputAmount.value = totalInKHR.value;
   }
 }
 
 function clearAmount() {
-  inputAmount.value = 0
+  inputAmount.value = 0;
 }
 
 // Format number with commas for KHR
 function formatKHR(value: number): string {
-  return value.toLocaleString('en-US')
+  return value.toLocaleString("en-US");
 }
 </script>
 
 <template>
   <div class="space-y-4">
     <div class="flex items-center gap-2">
-      <UButton variant="ghost" size="sm" icon="i-heroicons-arrow-left" @click="emit('back')" />
-      <h2 class="text-xl font-bold">Cash Payment</h2>
+      <UButton
+        variant="ghost"
+        size="sm"
+        icon="i-heroicons-arrow-left"
+        @click="emit('back')"
+      />
+      <h2 class="text-xl font-bold">Cash Checkout</h2>
     </div>
 
     <!-- Total Due -->
@@ -113,17 +118,27 @@ function formatKHR(value: number): string {
 
     <!-- Currency Toggle -->
     <div class="flex justify-center">
-      <div class="inline-flex rounded-lg border border-gray-200 dark:border-gray-700">
+      <div
+        class="inline-flex rounded-lg border border-gray-200 dark:border-gray-700"
+      >
         <button
           class="px-4 py-2 text-sm font-medium rounded-l-lg transition-colors"
-          :class="currency === 'USD' ? 'bg-primary text-white' : 'hover:bg-gray-100 dark:hover:bg-gray-800'"
+          :class="
+            currency === 'USD'
+              ? 'bg-primary text-white'
+              : 'hover:bg-gray-100 dark:hover:bg-gray-800'
+          "
           @click="currency !== 'USD' && toggleCurrency()"
         >
           USD ($)
         </button>
         <button
           class="px-4 py-2 text-sm font-medium rounded-r-lg transition-colors"
-          :class="currency === 'KHR' ? 'bg-primary text-white' : 'hover:bg-gray-100 dark:hover:bg-gray-800'"
+          :class="
+            currency === 'KHR'
+              ? 'bg-primary text-white'
+              : 'hover:bg-gray-100 dark:hover:bg-gray-800'
+          "
           @click="currency !== 'KHR' && toggleCurrency()"
         >
           KHR (៛)
@@ -133,7 +148,9 @@ function formatKHR(value: number): string {
 
     <!-- Cash Received Input -->
     <div>
-      <label class="text-sm font-medium mb-1 block">Cash Received ({{ currency }})</label>
+      <label class="text-sm font-medium mb-1 block"
+        >Cash Received ({{ currency }})</label
+      >
       <UInput
         v-model.number="inputAmount"
         type="number"
@@ -143,7 +160,9 @@ function formatKHR(value: number): string {
         :step="currency === 'USD' ? 0.01 : 100"
       >
         <template #leading>
-          <span class="text-gray-500">{{ currency === 'USD' ? '$' : '៛' }}</span>
+          <span class="text-gray-500">{{
+            currency === "USD" ? "$" : "៛"
+          }}</span>
         </template>
       </UInput>
     </div>
@@ -157,7 +176,7 @@ function formatKHR(value: number): string {
         variant="outline"
         @click="addAmount(amount)"
       >
-        +{{ currency === 'USD' ? `$${amount}` : `${formatKHR(amount)}៛` }}
+        +{{ currency === "USD" ? `$${amount}` : `${formatKHR(amount)}៛` }}
       </UButton>
       <UButton size="sm" variant="outline" @click="setExactAmount">
         Exact
@@ -171,22 +190,37 @@ function formatKHR(value: number): string {
     <div
       v-if="inputAmount > 0"
       class="text-center p-4 rounded-lg"
-      :class="canConfirm ? 'bg-green-100 dark:bg-green-900' : 'bg-red-100 dark:bg-red-900'"
+      :class="
+        canConfirm
+          ? 'bg-green-100 dark:bg-green-900'
+          : 'bg-red-100 dark:bg-red-900'
+      "
     >
-      <div class="text-sm" :class="canConfirm ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'">
-        {{ canConfirm ? 'Change' : 'Insufficient Amount' }}
+      <div
+        class="text-sm"
+        :class="
+          canConfirm
+            ? 'text-green-600 dark:text-green-400'
+            : 'text-red-600 dark:text-red-400'
+        "
+      >
+        {{ canConfirm ? "Change" : "Insufficient Amount" }}
       </div>
       <div
         class="text-2xl font-bold"
-        :class="canConfirm ? 'text-green-700 dark:text-green-300' : 'text-red-700 dark:text-red-300'"
+        :class="
+          canConfirm
+            ? 'text-green-700 dark:text-green-300'
+            : 'text-red-700 dark:text-red-300'
+        "
       >
         <template v-if="canConfirm">
           ${{ changeInUSD.toFixed(2) }}
-          <span class="text-base font-normal">≈ {{ formatKHR(changeInKHR) }} ៛</span>
+          <span class="text-base font-normal"
+            >≈ {{ formatKHR(changeInKHR) }} ៛</span
+          >
         </template>
-        <template v-else>
-          -${{ shortfall.toFixed(2) }}
-        </template>
+        <template v-else> -${{ shortfall.toFixed(2) }} </template>
       </div>
     </div>
 
@@ -203,7 +237,7 @@ function formatKHR(value: number): string {
       :disabled="!canConfirm"
       @click="emit('confirm')"
     >
-      Confirm Payment
+      Confirm Checkout
     </UButton>
   </div>
 </template>

@@ -1,47 +1,52 @@
 <script setup lang="ts">
-import QRCode from 'qrcode'
+import QRCode from "qrcode";
 
 const props = defineProps<{
-  total: number
-}>()
+  total: number;
+}>();
 
 const emit = defineEmits<{
-  confirm: []
-  back: []
-}>()
+  confirm: [];
+  back: [];
+}>();
 
-const qrDataUrl = ref<string>('')
-const orderId = `ORD-${Date.now()}`
+const qrDataUrl = ref<string>("");
+const orderId = `ORD-${Date.now()}`;
 
 // Generate QR code on mount
 onMounted(async () => {
   const paymentData = JSON.stringify({
     orderId,
     amount: props.total,
-    currency: 'USD',
-    timestamp: new Date().toISOString()
-  })
+    currency: "USD",
+    timestamp: new Date().toISOString(),
+  });
 
   try {
     qrDataUrl.value = await QRCode.toDataURL(paymentData, {
       width: 250,
       margin: 2,
       color: {
-        dark: '#000000',
-        light: '#ffffff'
-      }
-    })
+        dark: "#000000",
+        light: "#ffffff",
+      },
+    });
   } catch (err) {
-    console.error('Failed to generate QR code:', err)
+    console.error("Failed to generate QR code:", err);
   }
-})
+});
 </script>
 
 <template>
   <div class="space-y-4">
     <div class="flex items-center gap-2">
-      <UButton variant="ghost" size="sm" icon="i-heroicons-arrow-left" @click="emit('back')" />
-      <h2 class="text-xl font-bold">QR Code Payment</h2>
+      <UButton
+        variant="ghost"
+        size="sm"
+        icon="i-heroicons-arrow-left"
+        @click="emit('back')"
+      />
+      <h2 class="text-xl font-bold">QR Code Checkout</h2>
     </div>
 
     <!-- QR Code Display -->
@@ -58,7 +63,9 @@ onMounted(async () => {
 
       <div class="mt-4 text-center">
         <div class="text-sm text-gray-500">Scan to pay</div>
-        <div class="text-2xl font-bold text-primary">${{ total.toFixed(2) }}</div>
+        <div class="text-2xl font-bold text-primary">
+          ${{ total.toFixed(2) }}
+        </div>
       </div>
     </div>
 
@@ -69,12 +76,7 @@ onMounted(async () => {
     </div>
 
     <!-- Confirm Button -->
-    <UButton
-      block
-      size="lg"
-      color="primary"
-      @click="emit('confirm')"
-    >
+    <UButton block size="lg" color="primary" @click="emit('confirm')">
       Payment Received
     </UButton>
   </div>
