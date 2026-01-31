@@ -4,12 +4,14 @@ const { locale, setLocale, locales } = useI18n();
 const items = ref<DropdownMenuItem[]>([
   {
     label: "🇬🇧 English",
+    class: "cursor-pointer",
     onSelect: () => {
       setLocale("en");
     },
   },
   {
     label: "🇰🇭 ភាសាខ្មែរ",
+    class: "cursor-pointer",
     onSelect: () => {
       setLocale("kh");
     },
@@ -20,10 +22,10 @@ const items = ref<DropdownMenuItem[]>([
 <template>
   <UDropdownMenu :items="items">
     <button
-      class="px-2 py-1 dark:bg-black/40 bg-gray-200 rounded-md flex items-center"
+      class="px-2 py-1 cursor-pointer dark:bg-black/40 bg-gray-200 rounded-md flex items-center"
     >
-      <span v-if="locale === 'en'">🇬🇧 English</span>
-      <span v-else-if="locale === 'kh'">🇰🇭 ភាសាខ្មែរ</span>
+      <div v-if="locale === 'en'">🇬🇧 English</div>
+      <div v-else-if="locale === 'kh'">🇰🇭 ភាសាខ្មែរ</div>
     </button>
   </UDropdownMenu>
 </template>

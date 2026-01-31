@@ -20,8 +20,8 @@ const handleSearch = debounce((event: Event) => {
   <main class="grid grid-cols-1 xl:grid-cols-[2fr_1fr] h-full gap-4">
     <!-- Products Section -->
     <div class="overflow-y-auto overflow-x-hidden px-3 h-full">
-      <div class="mb-3 sticky top-0 z-10 bg-gray-50 py-2 dark:bg-black">
-        <div class="flex justify-between mb-3 dark:bg-black items-center">
+      <div class="mb-3 sticky top-0 z-10 bg-gray-50 dark:bg-[#1b1b1f] py-2 ">
+        <div class="flex justify-between mb-3  items-center">
           <h1 class="text-2xl font-bold">Products</h1>
           <UInput
             icon="i-lucide-search"
@@ -37,7 +37,7 @@ const handleSearch = debounce((event: Event) => {
     </div>
 
     <!-- Cart Section -->
-    <div class="overflow-hidden xl:shadow-lg xl:p-3 h-full hidden rounded-lg">
+    <div class="overflow-hidden xl:shadow-lg xl:p-3 h-full xl:block hidden rounded-lg">
       <OrderCardPanel />
     </div>
     <UDrawer v-model:open="open" direction="right">

@@ -3,7 +3,7 @@ import type { Product } from '~~/shared/types/product'
 export const products: Product[] = [
   {
     id: 1,
-    name: "Beef Lok Lak",
+    name: "Beef Lok Lak fdfdfdfdfdfdfdfdfdfdfdfd",
     originalPrice: 6.5,
     promoPrice: 5.5,
     discountPercent: 15,

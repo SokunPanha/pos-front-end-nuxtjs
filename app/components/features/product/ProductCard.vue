@@ -39,9 +39,18 @@ function handleAddToCart() {
 
     <!-- Content -->
     <div class="mt-3 space-y-1">
-      <h3 class="font-semibold text-base">
-        {{ product.name }}
-      </h3>
+      <UTooltip
+        :text="product.name"
+        :content="{
+          align: 'center',
+          side: 'top',
+        }"
+        :delay-duration="0"
+      >
+        <h3 class="font-semibold text-base line-clamp-1">
+          {{ product.name }}
+        </h3>
+      </UTooltip>
 
       <p class="text-xs text-gray-500">
         {{ product.category }}
@@ -82,6 +91,7 @@ function handleAddToCart() {
         <!-- Quantity -->
         <div class="flex items-center gap-2">
           <UButton
+            class="cursor-pointer"
             size="xs"
             icon="i-heroicons-minus"
             @click="cartStore.decrease(props.product.id)"
@@ -92,6 +102,7 @@ function handleAddToCart() {
           </span>
 
           <UButton
+            class="cursor-pointer"
             size="xs"
             icon="i-heroicons-plus"
             @click="cartStore.increase(props.product.id)"
@@ -102,6 +113,7 @@ function handleAddToCart() {
         <UButton
           color="error"
           variant="ghost"
+          class="cursor-pointer"
           icon="i-heroicons-trash"
           @click="cartStore.remove(props.product.id)"
         />

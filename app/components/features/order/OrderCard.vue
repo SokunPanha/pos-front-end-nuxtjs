@@ -18,9 +18,18 @@ const emit = defineEmits(["increase", "decrease", "remove"]);
 
       <!-- Info -->
       <div class="flex-1">
-        <p class="font-medium">
-          {{ item.name }}
-        </p>
+        <UTooltip
+          :text="item.name"
+          :content="{
+            align: 'center',
+            side: 'top',
+          }"
+          :delay-duration="0"
+        >
+          <p class="font-medium line-clamp-1">
+            {{ item.name }}
+          </p>
+        </UTooltip>
 
         <div class="text-sm text-gray-500">${{ item.price.toFixed(2) }}</div>
       </div>

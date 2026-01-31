@@ -1,6 +1,7 @@
 {
     "placeholder": {
         "tableNumber": "Table number",
-        "orderNotes": "Order notes..."
+        "orderNotes": "Order notes...",
+        "search": "Search..."
     }
 }

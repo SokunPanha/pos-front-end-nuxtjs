@@ -10,30 +10,29 @@ const { t } = useI18n();
 const navigationItems = computed<NavigationMenuItem[][]>(() => [
   [
     {
-      label: t("label.orders"),
-      icon: "i-lucide-shopping-cart",
-      children: [
-        {
-          label: t("label.newOrders"),
-          to: "/pos/order",
-          icon: "i-lucide-plus-circle",
-        },
-        {
-          label: t("label.openOrders"),
-          to: "/pos/orders/open",
-          icon: "i-lucide-clock",
-        },
-        {
-          label: t("label"),
-          to: "/pos/checkout",
-          icon: "i-lucide-credit-card",
-        },
-        {
-          label: t("label.orderHistory"),
-          to: "/pos/orders/history",
-          icon: "i-lucide-history",
-        },
-      ],
+      label: t("label.newOrders"),
+      to: "/pos/order",
+      icon: "i-lucide-plus-circle",
+    },
+    {
+      label: t("label.openOrders"),
+      to: "/pos/orders/open",
+      icon: "i-lucide-clock",
+    },
+    {
+      label: t("label.checkout"),
+      to: "/pos/checkout",
+      icon: "i-lucide-credit-card",
+    },
+     {
+      label: t("label.dinnerTable"),
+      to: "/pos/tables",
+      icon: "i-lucide-armchair",
+    },
+    {
+      label: t("label.orderHistory"),
+      to: "/pos/orders/history",
+      icon: "i-lucide-history",
     },
   ],
 ]);

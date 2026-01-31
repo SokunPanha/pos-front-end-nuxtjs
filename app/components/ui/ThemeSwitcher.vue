@@ -6,6 +6,7 @@ const { t } = useI18n();
 <template>
   <ClientOnly>
     <UButton
+    class="cursor-pointer"
       @click="
         colorMode.preference =
           colorMode.preference === 'dark' ? 'light' : 'dark'

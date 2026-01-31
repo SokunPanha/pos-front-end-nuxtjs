@@ -29,3 +29,8 @@
 .fade-leave-to {
   opacity: 0;
 }
+
+
+@theme {
+  --color-dark-50: #000020;
+}

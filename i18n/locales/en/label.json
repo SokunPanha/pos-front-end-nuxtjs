@@ -46,6 +46,7 @@
         "done": "Done",
         "emptyCart": "Empty Cart",
         "addToCart": "Add to Cart",
-        "search": "Search"
+        "search": "Search",
+        "dinnerTable": "Dinner Table"
     }
 }
