@@ -259,7 +259,7 @@ function printReceipt() {
     <!-- Action Buttons -->
     <div class="flex gap-2">
       <UButton
-        class="flex-1"
+        class="flex-1 cursor-pointer"
         size="lg"
         color="neutral"
         variant="outline"
@@ -268,7 +268,7 @@ function printReceipt() {
       >
         Print
       </UButton>
-      <UButton class="flex-1" size="lg" color="primary" @click="emit('done')">
+      <UButton class="flex-1 cursor-pointer" size="lg" color="primary" @click="emit('done')">
         Done
       </UButton>
     </div>

@@ -103,6 +103,7 @@ function formatKHR(value: number): string {
   <div class="space-y-4">
     <div class="flex items-center gap-2">
       <UButton
+        class="cursor-pointer"
         variant="ghost"
         size="sm"
         icon="i-heroicons-arrow-left"
@@ -124,7 +125,7 @@ function formatKHR(value: number): string {
         class="inline-flex rounded-lg border border-gray-200 dark:border-gray-700"
       >
         <button
-          class="px-4 py-2 text-sm font-medium rounded-l-lg transition-colors"
+          class="px-4 py-2 text-sm font-medium rounded-l-lg transition-colors cursor-pointer"
           :class="
             currency === 'USD'
               ? 'bg-primary text-white'
@@ -135,7 +136,7 @@ function formatKHR(value: number): string {
           USD ($)
         </button>
         <button
-          class="px-4 py-2 text-sm font-medium rounded-r-lg transition-colors"
+          class="px-4 py-2 text-sm font-medium rounded-r-lg transition-colors cursor-pointer"
           :class="
             currency === 'KHR'
               ? 'bg-primary text-white'
@@ -172,6 +173,7 @@ function formatKHR(value: number): string {
     <!-- Quick Amount Buttons -->
     <div class="flex flex-wrap gap-2">
       <UButton
+        class="cursor-pointer"
         v-for="amount in quickAmounts"
         :key="amount"
         size="sm"
@@ -180,10 +182,10 @@ function formatKHR(value: number): string {
       >
         +{{ currency === "USD" ? `$${amount}` : `${formatKHR(amount)}៛` }}
       </UButton>
-      <UButton size="sm" variant="outline" @click="setExactAmount">
+      <UButton class="cursor-pointer" size="sm" variant="outline" @click="setExactAmount">
         {{ t("label.exact") }}
       </UButton>
-      <UButton size="sm" variant="ghost" color="error" @click="clearAmount">
+      <UButton class="cursor-pointer" size="sm" variant="ghost" color="error" @click="clearAmount">
         {{ t("label.clear") }}
       </UButton>
     </div>
@@ -233,6 +235,7 @@ function formatKHR(value: number): string {
 
     <!-- Confirm Button -->
     <UButton
+      class="cursor-pointer"
       block
       size="lg"
       color="primary"

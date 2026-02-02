@@ -78,7 +78,7 @@ onMounted(async () => {
     </div>
 
     <!-- Confirm Button -->
-    <UButton block size="lg" color="primary" @click="emit('confirm')">
+    <UButton class="cursor-pointer" block size="lg" color="primary" @click="emit('confirm')">
       {{ t("label.paymentReceived") }}
     </UButton>
   </div>

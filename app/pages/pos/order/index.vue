@@ -3,6 +3,10 @@ import FloatButton from "~/components/ui/FloatButton.vue";
 import debounce from 'lodash/debounce'
 const route = useRoute();
 const router = useRouter();
+
+onMounted(()=>{
+  router.push("/pos/order");
+})
 const handleCategorySelected = (category: string) => {
   router.push({path: "/pos/order", query: {
     ...route.query,
