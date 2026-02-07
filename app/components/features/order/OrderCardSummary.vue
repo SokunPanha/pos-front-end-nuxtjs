@@ -8,6 +8,12 @@ const { t } = useI18n();
 
 <template>
   <UCard>
+    <OrderSummary
+      :total-items="cartStore.totalItems"
+      :sub-total="cartStore.subTotal"
+      :discount="cartStore.discount"
+      :total="cartStore.total"
+    />
     <div class="space-y-2 text-sm">
       <div class="flex justify-between">
         <span>{{ t("label.items") }}</span>

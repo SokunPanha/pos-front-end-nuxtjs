@@ -10,7 +10,7 @@ const emit = defineEmits(["increase", "decrease", "remove"]);
 
 <template>
   <div
-    class="flex flex-row justify-between bg-gray-50 dark:bg-gray-800 p-3 rounded-sm gap-3 items-center"
+    class="flex flex-row justify-between   p-3 rounded-sm gap-3 items-center"
   >
     <div class="flex flex-row gap-3 items-center">
       <!-- Image -->
