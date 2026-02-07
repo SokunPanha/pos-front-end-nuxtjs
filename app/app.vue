@@ -4,7 +4,7 @@ const layout = computed(() => {
   if (route.path.startsWith('/admin')) {
     return 'admin-layout'
   } else if (route.path.startsWith('/cashier')) {
-    return 'pos-layout'
+    return 'cashier-layout'
   }
 
 })
