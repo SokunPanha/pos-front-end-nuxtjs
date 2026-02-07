@@ -47,24 +47,24 @@ function handleAddToCart() {
         }"
         :delay-duration="0"
       >
-        <h3 class="font-semibold text-base line-clamp-1">
+        <h3 class="font-semibold sm:text-base  text-sm line-clamp-1">
           {{ product.name }}
         </h3>
       </UTooltip>
 
-      <p class="text-xs text-gray-500">
+      <p class="text-xs text-gray-500 sm:text-sm ">
         {{ product.category }}
       </p>
 
       <!-- Price -->
       <div class="flex items-center gap-2 mt-1">
-        <span class="font-bold text-lg text-primary">
+        <span class="font-bold md:text-lg sm:text-base text-sm text-primary">
           ${{ finalPrice.toFixed(2) }}
         </span>
 
         <span
           v-if="product.promoPrice"
-          class="line-through text-sm text-gray-400"
+          class="line-through md:text-sm sm:text-xs text-xs text-gray-400"
         >
           ${{ product.originalPrice.toFixed(2) }}
         </span>

@@ -8,11 +8,12 @@ const route = useRoute();
 watch(
   () => [route.query.category, route.query.search],
   ([newCategory, newSearch]) => {
- 
     if (newCategory == "" && !newSearch) {
       fetchProducts({});
     } else if(newCategory || newSearch) {
       fetchProducts({category: newCategory as string, search: newSearch as string});
+    }else{
+      fetchProducts({});
     }
     
   },
@@ -42,23 +43,15 @@ watch(
     <div
       v-else-if="products.length === 0"
       key="empty"
-      class="flex justify-center items-center w-full h-full gap-2"
+      class="flex justify-center items-center  w-full max-h-screen h-full  gap-2"
     >
-      <UIcon name="i-lucide-search" class="text-4xl" />
+      <UIcon name="i-lucide-search" class="text-4xl  "  />
       <p>No products found</p>
     </div>
 
     <!-- Products -->
-    <div
-      v-else
-      key="products"
-      class="grid grid-cols-2 p-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5 gap-4"
-    >
-      <ProductCard
-        v-for="product in products"
-        :key="product.id"
-        :product="product"
-      />
+    <div v-else class="h-full overflow-y-auto">
+       <slot name="products" :products="products" ></slot>
     </div>
   </Transition>
 </template>
