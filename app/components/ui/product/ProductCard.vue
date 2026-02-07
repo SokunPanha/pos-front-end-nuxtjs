@@ -83,7 +83,7 @@ function handleAddToCart() {
         icon="i-heroicons-shopping-cart"
         @click="handleAddToCart"
       >
-        <span class=" md:text-base line-clamp-1 text-xs"> {{ $t("label.addToCart") }}</span>
+        <span class=" md:text-base line-clamp-1 text-xs text-white"> {{ $t("label.addToCart") }}</span>
       </UButton>
 
       <div
@@ -93,7 +93,7 @@ function handleAddToCart() {
         <!-- Quantity -->
         <div class="flex items-center gap-2">
           <UButton
-            class="cursor-pointer"
+            class="cursor-pointer text-white"
             size="xs"
             icon="i-heroicons-minus"
             @click="cartStore.decrease(props.product.id)"
@@ -104,7 +104,7 @@ function handleAddToCart() {
           </span>
 
           <UButton
-            class="cursor-pointer"
+            class="cursor-pointer text-white" 
             size="xs"
             icon="i-heroicons-plus"
             @click="cartStore.increase(props.product.id)"
