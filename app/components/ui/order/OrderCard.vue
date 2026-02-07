@@ -37,7 +37,7 @@ const emit = defineEmits(["increase", "decrease", "remove"]);
       <!-- Quantity -->
       <div class="flex items-center gap-2">
         <UButton
-          class="cursor-pointer "
+          class="cursor-pointer text-white"
           size="xs"
           icon="i-heroicons-minus"
           @click="emit('decrease', item.productId)"
@@ -48,7 +48,7 @@ const emit = defineEmits(["increase", "decrease", "remove"]);
         </span>
 
         <UButton
-          class="cursor-pointer"
+          class="cursor-pointer text-white"
           size="xs"
           icon="i-heroicons-plus"
           @click="emit('increase', item.productId)"

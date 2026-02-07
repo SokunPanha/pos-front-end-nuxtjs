@@ -39,7 +39,7 @@ const open = defineModel<boolean>("open", { default: false });
         :discount="cartStore.discount"
         :total="cartStore.total"
       />
-      <UButton block size="lg" color="success" class="cursor-pointer">
+      <UButton block size="lg" color="primary" class="cursor-pointer text-white font-bold ">
         {{ $t("label.placeOrder") }}
       </UButton>
     </template>
