@@ -1,31 +1,39 @@
 <script setup lang="ts">
 import FloatButton from "~/components/ui/FloatButton.vue";
-import debounce from 'lodash/debounce'
+import debounce from "lodash/debounce";
 const route = useRoute();
 const router = useRouter();
 
-onMounted(()=>{
+onMounted(() => {
   router.push("/pos/order");
-})
+});
 const handleCategorySelected = (category: string) => {
-  router.push({path: "/pos/order", query: {
-    ...route.query,
-    category}});
+  router.push({
+    path: "/pos/order",
+    query: {
+      ...route.query,
+      category,
+    },
+  });
 };
 const open = ref(false);
 const handleSearch = debounce((event: Event) => {
   const target = event.target as HTMLInputElement;
-  router.push({path: "/pos/order", query: {
-    ...route.query,
-    search: target.value}});
+  router.push({
+    path: "/pos/order",
+    query: {
+      ...route.query,
+      search: target.value,
+    },
+  });
 }, 500);
 </script>
 <template>
   <main class="grid grid-cols-1 xl:grid-cols-[2fr_1fr] h-full gap-4">
     <!-- Products Section -->
     <div class="overflow-y-auto overflow-x-hidden px-3 h-full">
-      <div class="mb-3 sticky top-0 z-10 bg-gray-50 dark:bg-[#1b1b1f] py-2 ">
-        <div class="flex justify-between mb-3  items-center">
+      <div class="mb-3 sticky top-0 z-10 bg-gray-50 dark:bg-[#1b1b1f] py-2">
+        <div class="flex justify-between mb-3 items-center">
           <h1 class="text-2xl font-bold">Products</h1>
           <UInput
             icon="i-lucide-search"
@@ -37,11 +45,26 @@ const handleSearch = debounce((event: Event) => {
         </div>
         <ProductCategoryList @category-selected="handleCategorySelected" />
       </div>
-      <ProductGrid />
+      <ProductGrid>
+        <template #products="{ products }">
+          <div
+            key="products"
+            class="grid grid-cols-2 p-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5 gap-4"
+          >
+            <ProductCard
+              v-for="product in products"
+              :key="product.id"
+              :product="product"
+            />
+          </div>
+        </template>
+      </ProductGrid>
     </div>
 
     <!-- Cart Section -->
-    <div class="overflow-hidden xl:shadow-lg xl:p-3 h-full xl:block hidden rounded-lg">
+    <div
+      class="overflow-hidden xl:shadow-lg xl:p-3 h-full xl:block hidden rounded-lg"
+    >
       <OrderCardPanel />
     </div>
     <UDrawer v-model:open="open" direction="right">
