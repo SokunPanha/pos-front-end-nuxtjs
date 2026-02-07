@@ -55,6 +55,7 @@
         "emptyCart": "Empty Cart",
         "addToCart": "Add to Cart",
         "search": "Search",
-        "dinnerTable": "Dinner Table"
+        "dinnerTable": "Dinner Table",
+        "yourOrder": "Your Order"
     }
 }

@@ -2,6 +2,8 @@
     "message": {
         "pleaseSelectTable": "Please select a table",
         "failedToCreateOrder": "Failed to create order",
-        "failedToProcessPayment": "Failed to process payment"
+        "failedToProcessPayment": "Failed to process payment",
+        "aboutUs": "We are a family-owned restaurant located in the heart of the city. We serve authentic various food made with fresh ingredients. there are also various drink and coffee",
+        "storeLocation": "Store Location"
     }
 }
