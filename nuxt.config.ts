@@ -6,6 +6,7 @@ export default defineNuxtConfig({
       'components/layouts/',
       'components/features/',
       'components/',
+      'components/customer-portal/',
     ],
   },
   css: ["~/assets/css/main.css"],
