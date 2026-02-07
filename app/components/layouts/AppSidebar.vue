@@ -4,7 +4,9 @@ defineProps<{
 }>();
 
 import type { NavigationMenuItem } from "@nuxt/ui";
-
+const emit = defineEmits<{
+  (e: "selected", value: boolean): void;
+}>();
 const { t } = useI18n();
 
 const navigationItems = computed<NavigationMenuItem[][]>(() => [
@@ -13,26 +15,33 @@ const navigationItems = computed<NavigationMenuItem[][]>(() => [
       label: t("label.newOrders"),
       to: "/cashier/order",
       icon: "i-lucide-plus-circle",
+      onSelect: () => {
+        emit("selected", true);
+      },
     },
     {
       label: t("label.openOrders"),
       to: "/cashier/open-order",
       icon: "i-lucide-clock",
+      onSelect: () => emit("selected", true),
     },
     {
       label: t("label.checkout"),
       to: "/cashier/checkout",
       icon: "i-lucide-credit-card",
+      onSelect: () => emit("selected", true),
     },
-     {
+    {
       label: t("label.dinnerTable"),
       to: "/cashier/dinning-table",
       icon: "i-lucide-armchair",
+      onSelect: () => emit("selected", true),
     },
     {
       label: t("label.orderHistory"),
       to: "/cashier/order-history",
       icon: "i-lucide-history",
+      onSelect: () => emit("selected", true),
     },
   ],
 ]);

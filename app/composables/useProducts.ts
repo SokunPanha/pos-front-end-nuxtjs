@@ -12,7 +12,6 @@ export function useProducts() {
 
     try {
       const query = category || search ? `?category=${encodeURIComponent(category || '')}&search=${encodeURIComponent(search || '')}` : ''
-      console.log("🚀 ~ fetchProducts ~ query:", query)
       const response = await $fetch<{ success: boolean; products: Product[] }>(`/api/pos/products${query}`)
       products.value = response.products
     } catch (e) {

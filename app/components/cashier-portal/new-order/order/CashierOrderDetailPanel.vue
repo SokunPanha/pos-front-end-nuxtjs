@@ -4,8 +4,8 @@ const cartStore = useCartStore();
 </script>
 
 <template>
-  <main class="flex flex-col justify-between h-full">
-    <h1 class="text-2xl overflow-hidden font-bold py-3">
+  <main class="flex flex-col justify-between h-full  p-2 ">
+    <h1 class="md:text-2xl text-md overflow-hidden font-bold py-3">
       {{ $t("label.orderDetails") }}
     </h1>
     <CashierOrderOptions />

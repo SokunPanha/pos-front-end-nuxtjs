@@ -26,7 +26,7 @@ const handleSearch = debounce((event: Event) => {
 <template>
     <div class="mb-3 bg-gray-50 dark:bg-gray-900 py-2">
         <div class="flex justify-between mb-3 items-center">
-          <h1 class="text-2xl font-bold">{{ $t("label.orderList") }}</h1>
+          <h1 class="text-xl md:text-2xl font-bold">{{ $t("label.orderList") }}</h1>
           <UInput
             icon="i-lucide-search"
             size="md"

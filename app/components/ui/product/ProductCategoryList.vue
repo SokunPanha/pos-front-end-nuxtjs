@@ -23,7 +23,8 @@ function handleCategorySelected(category:   string) {
        <UButton
          v-for="category in categories"
          :key="category.id"
-         variant="outline"
+         variant="ghost"
+         size="md"
          :label="category.name"
          class="cursor-pointer"
          :class="{ 'bg-primary text-white': category.value === selectedCategory }"

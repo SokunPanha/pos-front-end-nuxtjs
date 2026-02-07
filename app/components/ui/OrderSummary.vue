@@ -10,26 +10,26 @@ const { t } = useI18n();
 <template>
      <div class="space-y-2 text-sm">
       <div class="flex justify-between">
-        <span>{{ t("label.items") }}</span>
-        <span>{{ props.totalItems }}</span>
+        <span class="md:text-base text-xs">{{ t("label.items") }}</span>
+        <span class="md:text-base text-xs">{{ props.totalItems }}</span>
       </div>
 
       <div class="flex justify-between">
-        <span>{{ t("label.subtotal") }}</span>
-        <span>${{ props.subTotal.toFixed(2) }}</span>
+        <span class="md:text-base text-xs">{{ t("label.subtotal") }}</span>
+        <span class="md:text-base text-xs">${{ props.subTotal.toFixed(2) }}</span>
       </div>
 
       <div
         v-if="props.discount > 0"
         class="flex justify-between text-green-600"
       >
-        <span>{{ t("label.discount") }}</span>
-        <span>- ${{ props.discount.toFixed(2) }}</span>
+        <span class="md:text-base text-xs">{{ t("label.discount") }}</span>
+        <span class="md:text-base text-xs">- ${{ props.discount.toFixed(2) }}</span>
       </div>
 
       <div class="flex justify-between font-semibold text-base">
-        <span>{{ t("label.total") }}</span>
-        <span>${{ props.total.toFixed(2) }}</span>
+        <span class="md:text-base text-xs">{{ t("label.total") }}</span>
+        <span class="md:text-base text-xs">${{ props.total.toFixed(2) }}</span>
       </div>
     </div>-
 </template>

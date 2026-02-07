@@ -21,10 +21,12 @@ function handleAddToCart() {
   <UCard class="hover:shadow-lg cursor-pointer">
     <!-- Image -->
     <div class="relative">
-      <img
+      <NuxtImg 
+        format="webp"
         :src="product.image"
         :alt="product.name"
         class="h-40 w-full object-cover rounded-lg"
+        
       />
 
       <!-- Discount badge -->
@@ -47,12 +49,12 @@ function handleAddToCart() {
         }"
         :delay-duration="0"
       >
-        <h3 class="font-semibold sm:text-base  text-sm line-clamp-1">
+        <h3 class="font-semibold sm:text-base text-sm line-clamp-1">
           {{ product.name }}
         </h3>
       </UTooltip>
 
-      <p class="text-xs text-gray-500 sm:text-sm ">
+      <p class="text-xs text-gray-500 sm:text-sm">
         {{ product.category }}
       </p>
 
@@ -81,7 +83,7 @@ function handleAddToCart() {
         icon="i-heroicons-shopping-cart"
         @click="handleAddToCart"
       >
-        {{ $t("label.addToCart") }}
+        <span class=" md:text-base line-clamp-1 text-xs"> {{ $t("label.addToCart") }}</span>
       </UButton>
 
       <div

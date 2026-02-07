@@ -4,6 +4,8 @@ import { useCartStore } from "~/stores/cart";
 const emit = defineEmits(["openOrder", "openCheckout"]);
 const cartStore = useCartStore();
 const { t } = useI18n();
+
+
 </script>
 
 <template>
@@ -18,9 +20,8 @@ const { t } = useI18n();
       <div class="flex gap-2 flex-col">
         <UButton
           block
-          size="lg"
           color="primary"
-          class="cursor-pointer"
+          class="cursor-pointer "
           :disabled="cartStore.totalItems === 0"
           @click="emit('openOrder')"
         >
@@ -28,7 +29,6 @@ const { t } = useI18n();
         </UButton>
         <UButton
           block
-          size="lg"
           class="bg-green-800! dark:bg-green-500! cursor-pointer"
           :disabled="cartStore.totalItems === 0"
           @click="emit('openCheckout')"

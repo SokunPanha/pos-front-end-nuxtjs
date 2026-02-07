@@ -9,12 +9,10 @@ const emit = defineEmits(["increase", "decrease", "remove"]);
 </script>
 
 <template>
-  <div
-    class="flex flex-row justify-between   p-3 rounded-sm gap-3 items-center"
-  >
+  <div class="flex flex-row justify-between w-full  p-3 rounded-sm gap-3 items-center">
     <div class="flex flex-row gap-3 items-center">
       <!-- Image -->
-      <NuxtImg :src="item.image" class="h-16 w-16 rounded object-cover" />
+      <NuxtImg :src="item.image" class="md:h-16 md:w-16 h-10 w-10 rounded object-cover" format="webp" quality="80" />
 
       <!-- Info -->
       <div class="flex-1">
@@ -26,20 +24,20 @@ const emit = defineEmits(["increase", "decrease", "remove"]);
           }"
           :delay-duration="0"
         >
-          <p class="font-medium line-clamp-1">
+          <p class="md:text-base text-xs font-medium line-clamp-1 md:max-w-[300px] sm:max-w-[200px] max-w-[100px]">
             {{ item.name }}
           </p>
         </UTooltip>
 
-        <div class="text-sm text-gray-500">${{ item.price.toFixed(2) }}</div>
+        <div class="text-xs md:text-sm text-gray-500">${{ item.price.toFixed(2) }}</div>
       </div>
     </div>
 
-    <div class="flex gap-2 items-center">
+    <div class="flex gap-2 items-center  ">
       <!-- Quantity -->
       <div class="flex items-center gap-2">
         <UButton
-          class="cursor-pointer"
+          class="cursor-pointer "
           size="xs"
           icon="i-heroicons-minus"
           @click="emit('decrease', item.productId)"
