@@ -21,7 +21,7 @@ const { t } = useI18n();
         <UButton
           block
           color="primary"
-          class="cursor-pointer "
+          class="cursor-pointer font-semibold text-white"
           :disabled="cartStore.totalItems === 0"
           @click="emit('openOrder')"
         >
@@ -29,7 +29,7 @@ const { t } = useI18n();
         </UButton>
         <UButton
           block
-          class="bg-green-800! dark:bg-green-500! cursor-pointer"
+          class="bg-green-800! dark:bg-green-500! cursor-pointer font-semibold text-white"
           :disabled="cartStore.totalItems === 0"
           @click="emit('openCheckout')"
         >
