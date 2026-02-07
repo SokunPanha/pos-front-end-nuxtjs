@@ -21,6 +21,8 @@ watch(
 );
 </script>
 <template>
+    <div class="overflow-y-hidden overflow-x-hidden  h-full">
+
   <Transition name="fade" mode="out-in">
     <!-- Loading -->
     <UiProductSkeleton
@@ -54,6 +56,7 @@ watch(
        <slot name="products" :products="products" ></slot>
     </div>
   </Transition>
+  </div>
 </template>
 <style scoped>
 .fade-enter-active {

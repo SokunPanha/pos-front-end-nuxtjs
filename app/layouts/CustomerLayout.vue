@@ -4,8 +4,8 @@
 <template>
   <main class="max-w-2xl mx-auto">
     <UiCustomerNavBar />
-    <main class="p-2 h-[calc(100vh-68px)] overflow-y-hidden ">
+    <div class="p-2 h-[calc(100vh-68px)] overflow-y-hidden  ">
       <slot></slot>
-    </main>
+    </div>
   </main>
 </template>

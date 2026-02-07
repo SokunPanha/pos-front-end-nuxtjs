@@ -3,10 +3,19 @@ export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   components: {
     dirs: [
-      'components/layouts/',
-      'components/features/',
-      'components/',
-      'components/customer-portal/',
+      // Layouts
+      'components/layouts',
+      // Shared UI components (with Ui prefix)
+      { path: 'components/ui/product', pathPrefix: false },
+      { path: 'components/ui/order', pathPrefix: false },
+      // Store portal (no prefix)
+      { path: 'components/store-portal/navbar', pathPrefix: false },
+      { path: 'components/store-portal/cart', pathPrefix: false },
+      { path: 'components/store-portal/product', pathPrefix: false },
+      // Cashier portal (no prefix)
+      { path: 'components/cashier-portal/new-order/order', pathPrefix: false },
+      { path: 'components/cashier-portal/new-order/checkout', pathPrefix: false },
+      { path: 'components/ui',  prefix: 'Ui' },
     ],
   },
   css: ["~/assets/css/main.css"],
