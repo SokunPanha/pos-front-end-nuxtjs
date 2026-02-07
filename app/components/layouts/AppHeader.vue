@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import AppSidebar from "./AppSidebar.vue";
 
 defineEmits(["toggle-sidebar"]);
 </script>
@@ -26,7 +25,7 @@ defineEmits(["toggle-sidebar"]);
     </div>
 
     <div class="flex gap-3">
-      <UiThemeSwitcher />
+      <UColorModeButton />
       <UiLangSwitcher />
     </div>
   </header>

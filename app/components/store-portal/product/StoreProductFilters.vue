@@ -43,17 +43,17 @@ watch(
 );
 </script>
 <template>
-     <div class="py-5">
-      <div class="flex justify-between mb-3 items-center">
-        <UInput
-          icon="i-lucide-search"
-          size="md"
-          class="w-full"
-          variant="outline"
-          :placeholder="$t('placeholder.search')"
-          v-on:input="handleSearch"
-        />
-      </div>
-      <ProductCategoryList @category-selected="handleCategorySelected" />
+  <div class="py-5">
+    <div class="flex justify-between mb-3 items-center">
+      <UInput
+        icon="i-lucide-search"
+        size="md"
+        class="w-full"
+        variant="outline"
+        :placeholder="$t('placeholder.search')"
+        v-on:input="handleSearch"
+      />
     </div>
+    <ProductCategoryList @category-selected="handleCategorySelected" />
+  </div>
 </template>

@@ -1,24 +1,19 @@
 <script setup lang="ts">
-import debounce from "lodash/debounce";
-const route = useRoute();
-const router = useRouter();
-const cartStore = useCartStore();
 definePageMeta({
   layout: "customer-layout",
 });
 
 const open = ref(false);
-
 </script>
 <template>
   <main class="h-full gap-4 w-full relative">
     <!-- Products Section -->
-   <CustomerFoodFiltering />
+    <StoreProductFilters />
     <ProductGrid>
       <template #products="{ products }">
         <div
           key="products"
-          class="grid grid-cols-2 p-2 pb-[200px] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4"
+          class="grid grid-cols-2 p-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4"
         >
           <ProductCard
             v-for="product in products"
@@ -28,12 +23,8 @@ const open = ref(false);
         </div>
       </template>
     </ProductGrid>
-    <UButton
-      @click="open = !open"
-      icon="i-lucide-shopping-cart"
-      class="p-3 absolute bottom-5 right-5 cursor-pointer"
-    />
-    <CustomerOrderCardModal :open="open" />
+    <UiFloatButton @click="open = !open" icon="i-lucide-shopping-cart" />
+    <StoreCartDrawer v-model:open="open" />
   </main>
 </template>
 

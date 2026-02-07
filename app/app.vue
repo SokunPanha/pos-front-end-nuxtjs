@@ -3,7 +3,7 @@ const route = useRoute()
 const layout = computed(() => {
   if (route.path.startsWith('/admin')) {
     return 'admin-layout'
-  } else if (route.path.startsWith('/pos')) {
+  } else if (route.path.startsWith('/cashier')) {
     return 'pos-layout'
   }
 

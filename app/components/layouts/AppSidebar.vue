@@ -11,27 +11,27 @@ const navigationItems = computed<NavigationMenuItem[][]>(() => [
   [
     {
       label: t("label.newOrders"),
-      to: "/pos/order",
+      to: "/cashier/order",
       icon: "i-lucide-plus-circle",
     },
     {
       label: t("label.openOrders"),
-      to: "/pos/orders/open",
+      to: "/cashier/open-order",
       icon: "i-lucide-clock",
     },
     {
       label: t("label.checkout"),
-      to: "/pos/checkout",
+      to: "/cashier/checkout",
       icon: "i-lucide-credit-card",
     },
      {
       label: t("label.dinnerTable"),
-      to: "/pos/tables",
+      to: "/cashier/dinning-table",
       icon: "i-lucide-armchair",
     },
     {
       label: t("label.orderHistory"),
-      to: "/pos/orders/history",
+      to: "/cashier/order-history",
       icon: "i-lucide-history",
     },
   ],

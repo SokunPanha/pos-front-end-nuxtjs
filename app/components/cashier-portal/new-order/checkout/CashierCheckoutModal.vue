@@ -33,7 +33,7 @@ const {
       </UButton>
       <div class="p-4">
         <!-- Receipt View -->
-        <CheckoutReceipt
+        <CashierCheckoutReceipt
           v-if="isPaid && receiptData"
           :receipt="receiptData"
           @done="closeAndReset"
@@ -90,7 +90,7 @@ const {
         </div>
 
         <!-- Cash Checkout -->
-        <CheckoutCash
+        <CashierCheckoutCash
           v-else-if="paymentMethod === 'cash'"
           v-model:cash-received="cashReceived"
           :total="cartStore.total"
@@ -100,7 +100,7 @@ const {
         />
 
         <!-- QR Checkout -->
-        <CheckoutQR
+        <CashierCheckoutQR
           v-else-if="paymentMethod === 'qr'"
           :total="cartStore.total"
           @confirm="confirmQRCheckout"
