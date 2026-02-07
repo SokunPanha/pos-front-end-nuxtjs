@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { debounce } from 'lodash';
+import { debounce } from 'perfect-debounce';
 import { useCartStore } from '~/stores/cart';
 
 const cartStore = useCartStore();

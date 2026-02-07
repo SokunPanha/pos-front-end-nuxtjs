@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import debounce from "lodash/debounce";
+import { debounce } from "perfect-debounce";
 const route = useRoute();
 const router = useRouter();
 const handleCategorySelected = (category: string) => {
