@@ -42,7 +42,7 @@ function handleAddToCart() {
     <!-- Content -->
     <div class="mt-3 space-y-1">
       <UTooltip
-        :text="product.name"
+        :text="product.name[$i18n.locale]"
         :content="{
           align: 'center',
           side: 'top',
@@ -50,13 +50,11 @@ function handleAddToCart() {
         :delay-duration="0"
       >
         <h3 class="font-semibold sm:text-base text-sm line-clamp-1">
-          {{ product.name }}
+          {{ product.name[$i18n.locale] }}
         </h3>
       </UTooltip>
 
-      <p class="text-xs text-gray-500 sm:text-sm">
-        {{ product.category }}
-      </p>
+      
 
       <!-- Price -->
       <div class="flex items-center gap-2 mt-1">

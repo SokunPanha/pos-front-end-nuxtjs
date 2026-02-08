@@ -34,4 +34,10 @@ export default defineNuxtConfig({
     fallback: "light", // fallback value if not system preference found
     classSuffix: "",
   },
+  runtimeConfig: {
+    telegramBotToken: process.env.TELEGRAM_BOT_TOKEN,
+    public:{
+
+    }
+  },
 });

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 definePageMeta({
-  layout: "customer-layout",
+  layout: 'store-layout',
 });
 
 const open = ref(false);

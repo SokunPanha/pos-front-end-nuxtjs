@@ -17,7 +17,7 @@ const emit = defineEmits(["increase", "decrease", "remove"]);
       <!-- Info -->
       <div class="flex-1">
         <UTooltip
-          :text="item.name"
+          :text="item.name[$i18n.locale]"
           :content="{
             align: 'center',
             side: 'top',
@@ -25,7 +25,7 @@ const emit = defineEmits(["increase", "decrease", "remove"]);
           :delay-duration="0"
         >
           <p class="md:text-base text-xs font-medium line-clamp-1 md:max-w-[300px] sm:max-w-[200px] max-w-[100px]">
-            {{ item.name }}
+            {{ item.name[$i18n.locale] }}
           </p>
         </UTooltip>
 

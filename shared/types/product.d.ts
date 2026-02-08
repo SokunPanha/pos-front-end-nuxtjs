@@ -1,6 +1,9 @@
 export type Product = {
   id: number
-  name: string
+  name: {
+    en: string
+    kh: string
+  }
   originalPrice: number
   promoPrice?: number | null
   discountPercent?: number

@@ -1,7 +1,10 @@
 export type CartItem = {
   id: string           // unique per cart row
   productId: number
-  name: string
+  name: {
+    en: string;
+    kh: string;
+  }
   price: number        // final price (promo already applied)
   originalPrice?: number
   quantity: number

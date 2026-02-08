@@ -3,7 +3,10 @@ import { defineStore } from "pinia";
 
 export type Product = {
   id: number;
-  name: string;
+  name: {
+    en: string;
+    kh: string;
+  };
   originalPrice: number;
   promoPrice?: number | null;
   image: string;
@@ -92,6 +95,10 @@ export const useCartStore = defineStore("cart", () => {
     orderNote.value = note;
   }
 
+  function clearOrderItems(){
+    items.value = [];
+  }
+
   return {
     items,
     totalItems,
@@ -110,5 +117,6 @@ export const useCartStore = defineStore("cart", () => {
     setOrderType,
     setTableNumber,
     setOrderNote,
+    clearOrderItems
   };
 });
