@@ -9,7 +9,7 @@ const open = ref(false);
 
 const handleCategorySelected = (category: string) => {
   router.push({
-    path: "/",
+    path: "/store/" + route.params.storeId,
     query: {
       ...route.query,
       category,
@@ -20,12 +20,12 @@ const handleSearch = debounce((event: Event) => {
   const target = event.target as HTMLInputElement;
   if (target.value.trim() == "") {
     router.push({
-      path: "/",
+      path: "/store/" + route.params.storeId,
     });
     return;
   }
   router.push({
-    path: "/",
+    path: "/store/" + route.params.storeId,
     query: {
       ...route.query,
       search: target.value,

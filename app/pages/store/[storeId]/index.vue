@@ -2,7 +2,13 @@
 definePageMeta({
   layout: 'store-layout',
 });
-
+const route = useRoute();
+onMounted(()=>{
+  localStorage.setItem("tableId", route.params.storeId as string);
+})
+onUnmounted(()=>{
+  localStorage.removeItem("tableId");
+})
 const open = ref(false);
 </script>
 <template>
