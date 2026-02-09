@@ -2,9 +2,14 @@
 import { useCartStore } from "~/stores/cart";
 
 const emit = defineEmits(["openOrder", "openCheckout"]);
+const props = defineProps({
+  isLoading: {
+    type: Boolean,
+    default: false,
+  },
+});
 const cartStore = useCartStore();
 const { t } = useI18n();
-
 
 </script>
 
@@ -23,6 +28,7 @@ const { t } = useI18n();
           color="primary"
           class="cursor-pointer font-semibold text-white"
           :disabled="cartStore.totalItems === 0"
+          :loading="props.isLoading"
           @click="emit('openOrder')"
         >
           {{ t("label.placeOrder") }}

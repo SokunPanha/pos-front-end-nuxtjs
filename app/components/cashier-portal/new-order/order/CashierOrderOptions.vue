@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useCartStore } from "~/stores/cart";
-import { orderTypeOptions } from "#shared/constants";
 
 const cartStore = useCartStore();
 const showNote = ref(false);
@@ -12,7 +11,7 @@ const { t } = useI18n();
 <template>
   <div class="space-y-3 pb-3 border-b border-gray-200 dark:border-gray-700">
     <!-- Order Type Toggle -->
-    <UiOrderType/>
+    <OrderType/>
 
     <!-- Table Number (only for dine-in) -->
     <UInput

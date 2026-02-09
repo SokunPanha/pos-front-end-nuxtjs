@@ -1,5 +1,8 @@
 <script setup lang="ts">
+import usePlaceOrder from '~/composables/store/usePlaceOrder';
+
 const { showCheckoutModal, openCheckout, openOrder } = useOrders();
+const { onPlaceOrder, isLoading } = usePlaceOrder();
 const cartStore = useCartStore();
 </script>
 
@@ -21,7 +24,7 @@ const cartStore = useCartStore();
         />
       </template>
     </OrderCardGrid>
-    <CashierOrderCardSummary @open-order="openOrder" @open-checkout="openCheckout" />
+    <CashierOrderCardSummary :isLoading="isLoading" @open-order="onPlaceOrder" @open-checkout="openCheckout" />
     <CashierCheckoutModal v-model:open="showCheckoutModal" />
   </main>
 </template>
