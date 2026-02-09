@@ -8,7 +8,7 @@ const props = defineProps<{
 const { t } = useI18n();
 </script>
 <template>
-     <div class="space-y-2 text-sm">
+     <div class="space-y-2 text-sm h-fit">
       <div class="flex justify-between">
         <span class="md:text-base text-xs">{{ t("label.items") }}</span>
         <span class="md:text-base text-xs">{{ props.totalItems }}</span>
