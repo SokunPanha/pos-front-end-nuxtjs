@@ -17,7 +17,7 @@ export default defineEventHandler(async (event) => {
     {
       method: "POST",
       body: {
-        chat_id: "6413381172",
+        chat_id: "-5287523250",
         text: `📥 មានការបញ្ជាទិញថ្មី!
 
 🧾 បញ្ជីម្ហូប:
