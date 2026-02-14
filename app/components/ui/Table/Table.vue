@@ -17,6 +17,8 @@ import { useTableFullscreen } from "./useTableFullscreen";
 import { useTableSelection } from "./useTableSelection";
 import { useTableExport } from "./useTableExport";
 import TableToolbar from "./TableToolbar.vue";
+import DatePicker from "./DatePicker.vue";
+import DateRangePicker from "./DateRangePicker.vue";
 
 const props = defineProps({
   columns: {
@@ -266,6 +268,14 @@ const handleExport = () => {
                 v-model="filter[item.index]"
                 :items="item.options || []"
                 :placeholder="`Select ${item.label}`"
+              />
+              <DatePicker
+                v-else-if="item.valueType === 'date'"
+                v-model="filter[item.index]"
+              />
+              <DateRangePicker
+                v-else-if="item.valueType === 'dateRange'"
+                v-model="filter[item.index]"
               />
             </div>
           </div>

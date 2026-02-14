@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { h } from "vue";
 import {
   defineFilter,
   defineProTableColumns,
@@ -87,6 +88,26 @@ const columns = () => {
       },
     },
     {
+      accessorKey: "status",
+      title: "Status",
+      header: "Status",
+      cell: ({ row }: any) => {
+        const status = row.getValue("status") || "active";
+        const statusColors: Record<string, string> = {
+          active: "bg-green-100 text-green-800",
+          inactive: "bg-gray-100 text-gray-800",
+          pending: "bg-yellow-100 text-yellow-800",
+        };
+        return h(
+          "span",
+          {
+            class: `px-2 py-1 rounded-full text-xs font-medium ${statusColors[status] || "bg-gray-100 text-gray-800"}`,
+          },
+          status.charAt(0).toUpperCase() + status.slice(1)
+        );
+      },
+    },
+    {
       accessorKey: "description",
       title: "Description",
       header: "Description",
@@ -105,6 +126,16 @@ const filterField = defineFilter([
     label: "Price",
     index: "price",
     valueType: "number",
+  },
+  {
+    label: "Status",
+    index: "status",
+    valueType: "select",
+    options: [
+      { label: "Active", value: "active" },
+      { label: "Inactive", value: "inactive" },
+      { label: "Pending", value: "pending" },
+    ],
   },
   {
     label: "Created At",
