@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { h } from "vue";
+import { h, resolveComponent } from "vue";
 import {
   defineFilter,
   defineProTableColumns,
@@ -44,7 +44,7 @@ const columns = () => {
       title: "Product ID",
       meta: {
         class: {
-          th: "text-center bg-red-400",
+          th: "text-center",
           td: "text-center",
         },
       },
@@ -142,6 +142,22 @@ const filterField = defineFilter([
     index: "createdAt",
     valueType: "dateRange",
   },
+  {
+    label: "Category",
+    index: "category",
+    valueType: "custom",
+    render: (filter: Record<string, any>) =>
+      h(resolveComponent("USelect"), {
+        modelValue: filter.category,
+        "onUpdate:modelValue": (val: any) => (filter.category = val),
+        items: [
+          { label: "Electronics", value: "electronics" },
+          { label: "Clothing", value: "clothing" },
+          { label: "Food", value: "food" },
+        ],
+        placeholder: "Select Category",
+      }),
+  },
 ]);
 
 // Handle row selection changes
@@ -170,6 +186,9 @@ const handleSelectionChange = (
     export-filename="products-export.csv"
     table-id="products-table"
   >
+  <template #table-header>
+<h1>test</h1>
+  </template>
     <template #toolbar-actions>
       <!-- Add custom toolbar actions here if needed -->
     </template>

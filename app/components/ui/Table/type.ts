@@ -1,3 +1,5 @@
+import type { VNode } from "vue";
+
 export const TableFilterType = {
   TEXT: "text",
   NUMBER: "number",
@@ -9,6 +11,7 @@ export const TableFilterType = {
   DATE: "date",
   DATE_RANGE: "dateRange",
   RADIO: "radio",
+  CUSTOM: "custom",
 } as const;
 
 
@@ -17,6 +20,7 @@ export interface FilterFieldType {
   index: string;
   valueType: FilterTypeValue;
   options?: { label: string; value: string }[];
+  render?: (filter: Record<string, any>) => VNode;
 }
 export interface TablePaginationType {
   paginationOptions?: number[];
@@ -32,6 +36,7 @@ export interface FilterSchemaItem {
   index: string;
   valueType: FilterTypeValue;
   options?: { label: string; value: string }[];
+  render?: (filter: Record<string, any>) => VNode;
 }
 
 // ProTable specific types

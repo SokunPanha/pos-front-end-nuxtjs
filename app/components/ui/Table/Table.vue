@@ -76,7 +76,7 @@ const props = defineProps({
 // Data fetching and pagination
 const { tableLoading, data, pagination, fetchData } = useTableData(
   props.request,
-  props.pagination.paginationOptions
+  props.pagination.paginationOptions,
 );
 
 // Filter management
@@ -138,7 +138,7 @@ const { isExporting, exportCurrentPage } = useTableExport();
 // Watch pagination changes
 watch(
   () => [pagination.value.page, pagination.value.limit],
-  () => fetchData(filter)
+  () => fetchData(filter),
 );
 
 // Computed columns with selection column if needed
@@ -248,10 +248,18 @@ const handleExport = () => {
 
       <!-- Filter Form -->
       <header v-if="filterField && filterField.length > 0">
-        <div class="flex justify-between items-end border-b border-accented py-3.5 px-4">
+        <div
+          class="flex justify-between items-end border-b border-accented py-3.5 px-4"
+        >
           <div class="flex gap-3 flex-wrap flex-1">
-            <div v-for="item in filterItems" :key="item.index" class="min-w-[200px]">
-              <label class="text-sm font-medium mb-1 block">{{ item.label }}</label>
+            <div
+              v-for="item in filterItems"
+              :key="item.index"
+              class="min-w-[200px]"
+            >
+              <label class="text-sm font-medium mb-1 block">{{
+                item.label
+              }}</label>
               <UInput
                 v-if="item.valueType === 'text'"
                 v-model="filter[item.index]"
@@ -264,7 +272,9 @@ const handleExport = () => {
                 :placeholder="`Enter ${item.label}`"
               />
               <USelect
-                v-else-if="item.valueType === 'select' || item.valueType === 'selectMenu'"
+                v-else-if="
+                  item.valueType === 'select' || item.valueType === 'selectMenu'
+                "
                 v-model="filter[item.index]"
                 :items="item.options || []"
                 :placeholder="`Select ${item.label}`"
@@ -276,6 +286,30 @@ const handleExport = () => {
               <DateRangePicker
                 v-else-if="item.valueType === 'dateRange'"
                 v-model="filter[item.index]"
+              />
+              <UTextarea
+                v-else-if="item.valueType === 'textarea'"
+                v-model="filter[item.index]"
+                :placeholder="`Enter ${item.label}`"
+              />
+              <UCheckbox
+                v-else-if="item.valueType === 'checkbox'"
+                v-model="filter[item.index]"
+                :label="item.label"
+              />
+              <USwitch
+                v-else-if="item.valueType === 'toggle'"
+                v-model="filter[item.index]"
+                :label="item.label"
+              />
+              <URadioGroup
+                v-else-if="item.valueType === 'radio'"
+                v-model="filter[item.index]"
+                :items="item.options || []"
+              />
+              <component
+                v-else-if="item.valueType === 'custom' && item.render"
+                :is="() => item.render!(filter)"
               />
             </div>
           </div>
@@ -311,6 +345,10 @@ const handleExport = () => {
         </div>
       </header>
 
+      <!-- Table Header Slot -->
+      <div class="py-3">
+        <slot name="table-header" />
+      </div>
       <!-- Table -->
       <UTable
         class="flex-1"

@@ -5,7 +5,7 @@ export function useTableFilter(
   filterField: FilterFieldType[] | undefined,
   fetchData: (filter?: any) => Promise<void>,
 ) {
-  const isCollapseFilter = ref(false);
+  const isCollapseFilter = ref(true);
   const loading = ref(false);
 
   const filterItems = computed(() =>
