@@ -1,47 +1,32 @@
 <script setup lang="ts">
 import { debounce } from 'perfect-debounce';
-import { useCartStore } from '~/stores/cart';
 
-const cartStore = useCartStore();
 const route = useRoute();
 const router = useRouter();
-const open = ref(false);
 
-const handleCategorySelected = (category: string) => {
+const handleCategorySelected = (uuid: string) => {
   router.push({
-    path: "/store/" + route.params.storeId,
+    path: '/store/' + route.params.storeId,
     query: {
       ...route.query,
-      category,
+      category: uuid || undefined,
     },
   });
 };
+
 const handleSearch = debounce((event: Event) => {
   const target = event.target as HTMLInputElement;
-  if (target.value.trim() == "") {
-    router.push({
-      path: "/store/" + route.params.storeId,
-    });
+  if (target.value.trim() === '') {
+    router.push({ path: '/store/' + route.params.storeId });
     return;
   }
   router.push({
-    path: "/store/" + route.params.storeId,
-    query: {
-      ...route.query,
-      search: target.value,
-    },
+    path: '/store/' + route.params.storeId,
+    query: { ...route.query, search: target.value },
   });
 }, 500);
-
-watch(
-  () => cartStore.total,
-  () => {
-    if (cartStore.total <= 0) {
-      open.value = false;
-    }
-  },
-);
 </script>
+
 <template>
   <div class="py-5">
     <div class="flex justify-between mb-3 items-center">
@@ -54,6 +39,6 @@ watch(
         v-on:input="handleSearch"
       />
     </div>
-    <ProductCategoryList @category-selected="handleCategorySelected" />
+    <StoreCategoryList @category-selected="handleCategorySelected" />
   </div>
 </template>

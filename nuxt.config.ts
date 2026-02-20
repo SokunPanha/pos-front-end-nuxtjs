@@ -1,6 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
+  routeRules:{
+    "/store/**": { isr: 300 },
+  },
   components: {
     dirs: [
       // Layouts
@@ -36,6 +39,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     telegramBotToken: process.env.TELEGRAM_BOT_TOKEN,
+    storeApiBaseUrl: process.env.STORE_API_BASE_URL || 'http://localhost:3003',
     public:{
 
     }

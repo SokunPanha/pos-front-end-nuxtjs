@@ -6,53 +6,31 @@ const props = defineProps({
   },
 });
 </script>
-    
+
 <template>
-  <div
-    class="grid grid-cols-2 p-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5 gap-4"
-  >
-    <UCard v-for="item in count" :key="item" class="animate-pulse">
-      <!-- Image skeleton -->
-      <div class="relative">
-        <div
-          class="h-40 w-full rounded-lg bg-gray-200 dark:bg-gray-700"
-        />
+  <div class="flex flex-col p-2 gap-3">
+    <UCard v-for="item in count" :key="item" :ui="{ body: 'p-0 sm:p-0' }">
+      <div class="flex gap-3 p-3 animate-pulse">
+        <!-- Image skeleton -->
+        <div class="shrink-0 h-24 w-24 rounded-lg bg-gray-200 dark:bg-gray-700" />
 
-        <!-- Discount badge placeholder -->
-        <div
-          class="absolute top-2 left-2 h-5 w-12 rounded bg-gray-300 dark:bg-gray-600"
-        />
-      </div>
+        <!-- Content skeleton -->
+        <div class="flex flex-col justify-between flex-1 py-1 min-w-0">
+          <div class="space-y-2">
+            <div class="h-4 w-3/4 rounded bg-gray-200 dark:bg-gray-700" />
+            <div class="h-3 w-1/2 rounded bg-gray-200 dark:bg-gray-700" />
+          </div>
+          <div class="flex gap-2 mt-2">
+            <div class="h-5 w-16 rounded bg-gray-300 dark:bg-gray-600" />
+            <div class="h-4 w-10 rounded bg-gray-200 dark:bg-gray-700" />
+          </div>
+        </div>
 
-      <!-- Content skeleton -->
-      <div class="mt-3 space-y-2">
-        <!-- Product name -->
-        <div
-          class="h-4 w-3/4 rounded bg-gray-200 dark:bg-gray-700"
-        />
-
-        <!-- Category -->
-        <div
-          class="h-3 w-1/2 rounded bg-gray-200 dark:bg-gray-700"
-        />
-
-        <!-- Price -->
-        <div class="flex gap-2 mt-2">
-          <div
-            class="h-5 w-20 rounded bg-gray-300 dark:bg-gray-600"
-          />
-          <div
-            class="h-4 w-12 rounded bg-gray-200 dark:bg-gray-700"
-          />
+        <!-- Arrow skeleton -->
+        <div class="flex items-center shrink-0">
+          <div class="h-4 w-4 rounded bg-gray-200 dark:bg-gray-700" />
         </div>
       </div>
-
-      <!-- Footer skeleton -->
-      <template #footer>
-        <div
-          class="h-9 w-full rounded bg-gray-300 dark:bg-gray-600"
-        />
-      </template>
     </UCard>
   </div>
 </template>

@@ -9,26 +9,28 @@ onMounted(()=>{
 onUnmounted(()=>{
   localStorage.removeItem("tableId");
 })
+
+
 const open = ref(false);
 </script>
 <template>
   <main class="h-full gap-4 w-full relative">
     <!-- Products Section -->
     <StoreProductFilters />
-    <ProductGrid>
+    <StoreProductGrid>
       <template #products="{ products }">
         <div
           key="products"
-          class="grid grid-cols-2 p-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4"
+          class="flex flex-col p-2 gap-3"
         >
-          <ProductCard
+          <StoreProductCard
             v-for="product in products"
-            :key="product.id"
+            :key="product.uuid"
             :product="product"
           />
         </div>
       </template>
-    </ProductGrid>
+    </StoreProductGrid>
     <UiFloatButton @click="open = !open" icon="i-lucide-shopping-cart" />
     <StoreCartDrawer v-model:open="open" />
   </main>

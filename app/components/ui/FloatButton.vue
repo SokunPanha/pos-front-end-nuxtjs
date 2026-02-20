@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const cartStore = useCartStore();
+const cartStore = useStoreCartStore();
 
 </script>
 <template>

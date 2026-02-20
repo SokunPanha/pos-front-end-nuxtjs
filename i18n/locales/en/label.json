@@ -57,6 +57,10 @@
         "search": "Search",
         "dinnerTable": "Dinner Table",
         "yourOrder": "Your Order",
-        "orderList": "Order List"
+        "orderList": "Order List",
+        "back": "Back",
+        "description": "Description",
+        "selectVariant": "Select Option",
+        "attributes": "Attributes"
     }
 }

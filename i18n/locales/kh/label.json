@@ -56,6 +56,10 @@
     "addToCart": "បន្ថែមទៅកន្ត្រក",
     "dinnerTable": "តុអាហារពេលល្ងាច",
     "yourOrder": "បញ្ជាទិញរបស់អ្នក",
-    "orderList": "បញ្ជីបញ្ជាទិញ"
+    "orderList": "បញ្ជីបញ្ជាទិញ",
+    "back": "ត្រឡប់",
+    "description": "ការពិពណ៌នា",
+    "selectVariant": "ជ្រើសរើសជម្រើស",
+    "attributes": "លក្ខណៈ"
   }
 }
